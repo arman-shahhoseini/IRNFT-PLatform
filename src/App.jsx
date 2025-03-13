@@ -136,7 +136,7 @@ function App() {
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-left">
           <a href="/" className="nav-logo">
-            <img src="/src/assets/images/logo/Logo.png" alt="IRNFT Logo" />
+            <img src="/images/logo/Logo.png" alt="IRNFT Logo" />
           </a>
           <div className="nav-links">
             <a href="/" className="nav-link">{t.nav.home}</a>
@@ -217,7 +217,7 @@ function App() {
           playsInline
           className="hero-video"
         >
-          <source src="/src/assets/images/hero/hero-bg.mp4" type="video/mp4" />
+          <source src="/images/hero/hero-bg.mp4" type="video/mp4" />
         </video>
         <div className="hero-content">
           <h1>{t.hero.title}</h1>
@@ -278,7 +278,7 @@ function App() {
                 </button>
               </div>
               <div className="featured-image">
-                <img src="/src/assets/images/collections/fates-faces.jpg" alt="Fates & Faces" />
+                <img src="/images/collections/fates-faces.jpg" alt="Fates & Faces" />
               </div>
             </div>
           </div>
@@ -287,7 +287,7 @@ function App() {
           <div className="upcoming-collections">
             <div className="upcoming-card" data-coming-soon={t.collections.comingSoon}>
               <div className="card-image">
-                <img src="/src/assets/images/collections/eclipse-syndicate.jpg" alt="Eclipse Syndicate" />
+                <img src="/images/collections/eclipse-syndicate.jpg" alt="Eclipse Syndicate" />
               </div>
               <div className="card-overlay">
                 <div className="card-content">
@@ -299,7 +299,7 @@ function App() {
 
             <div className="upcoming-card" data-coming-soon={t.collections.comingSoon}>
               <div className="card-image">
-                <img src="/src/assets/images/collections/neon-sovereigns.jpg" alt="Neon Sovereigns" />
+                <img src="/images/collections/neon-sovereigns.jpg" alt="Neon Sovereigns" />
               </div>
               <div className="card-overlay">
                 <div className="card-content">
