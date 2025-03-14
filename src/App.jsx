@@ -1,10 +1,61 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
+import Logo from './assets/images/logo/Logo.png'
+import HeroVideo from './assets/images/hero/hero-bg.mp4'
+import FatesFaces from './assets/images/collections/fates-faces.jpg'
+import EclipseSyndicate from './assets/images/collections/eclipse-syndicate.jpg'
+import NeonSovereigns from './assets/images/collections/neon-sovereigns.jpg'
+import Auth from './components/auth/Auth'
+import Dashboard from './components/dashboard/Dashboard'
+import { auth } from './firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import { connectWallet, disconnectWallet, checkWalletConnection } from './utils/wallet'
+import { useTranslation } from 'react-i18next'
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner"></div>
+        <p>در حال بارگذاری...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
+};
 
 function App() {
+  const { t } = useTranslation();
   const [language, setLanguage] = useState('fa')
   const [scrolled, setScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showAuth, setShowAuth] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [user, setUser] = useState(null)
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState('');
+  const [walletBalance, setWalletBalance] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
+  const [message, setMessage] = useState({ text: '', type: '' });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,145 +66,159 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user)
+        setIsAuthenticated(true)
+        localStorage.setItem('isAuthenticated', 'true')
+        localStorage.setItem('user', JSON.stringify(user))
+      } else {
+        setUser(null)
+        setIsAuthenticated(false)
+        localStorage.removeItem('isAuthenticated')
+        localStorage.removeItem('user')
+      }
+    })
+
+    return () => unsubscribe()
+  }, [])
+
+  useEffect(() => {
+    const checkWallet = async () => {
+      const isConnected = await checkWalletConnection();
+      if (isConnected) {
+        const savedWallet = JSON.parse(localStorage.getItem('wallet'));
+        if (savedWallet) {
+          setWalletConnected(true);
+          setWalletAddress(savedWallet.address);
+          setWalletBalance(savedWallet.balance);
+        }
+      }
+    };
+
+    checkWallet();
+  }, []);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const translations = {
-    en: {
-      nav: {
-        home: 'Home',
-        collections: 'Collections',
-        marketplace: 'Marketplace',
-        news: 'News',
-        dashboard: 'Dashboard',
-        login: 'Login',
-        register: 'Register',
-        search: 'Search...',
-        connectWallet: 'Connect Wallet'
-      },
-      hero: {
-        title: 'Welcome to IRNFT',
-        subtitle: 'Discover Unique Digital Art Collections',
-        cta: 'Explore Collections'
-      },
-      collections: {
-        title: 'Featured Collections',
-        comingSoon: 'Coming Soon',
-        fatesAndFaces: 'Fates & Faces',
-        eclipseSyndicate: 'Eclipse Syndicate',
-        neonSovereigns: 'Neon Sovereigns: Reign of the Cyber Queens'
-      },
-      footer: {
-        about: {
-          title: 'About IRNFT',
-          description: 'IRNFT is a unique platform for digital art collections, where each piece tells its own story through the lens of poker and fate.'
-        },
-        quickLinks: {
-          title: 'Quick Links',
-          home: 'Home',
-          collections: 'Collections',
-          marketplace: 'Marketplace',
-          news: 'News',
-          dashboard: 'Dashboard'
-        },
-        support: {
-          title: 'Support',
-          faq: 'FAQ',
-          terms: 'Terms of Service',
-          privacy: 'Privacy Policy',
-          contact: 'Contact Us'
-        },
-        newsletter: {
-          title: 'Newsletter',
-          description: 'Subscribe to our newsletter for the latest updates and exclusive offers.',
-          placeholder: 'Enter your email',
-          subscribe: 'Subscribe'
-        },
-        copyright: '© 2024 IRNFT. All rights reserved.'
-      }
-    },
-    fa: {
-      nav: {
-        home: 'خانه',
-        collections: 'کالکشن‌ها',
-        marketplace: 'بازار',
-        news: 'اخبار',
-        dashboard: 'داشبورد',
-        login: 'ورود',
-        register: 'ثبت نام',
-        search: 'جستجو...',
-        connectWallet: 'اتصال کیف پول'
-      },
-      hero: {
-        title: 'به IRNFT خوش آمدید',
-        subtitle: 'مجموعه‌های هنر دیجیتال منحصر به فرد را کشف کنید',
-        cta: 'مشاهده کالکشن‌ها'
-      },
-      collections: {
-        title: 'کالکشن‌های ویژه',
-        comingSoon: 'به زودی',
-        fatesAndFaces: 'سرنوشت‌ها و چهره‌ها',
-        eclipseSyndicate: 'سندیکا خسوف',
-        neonSovereigns: 'سلاطین نئون: فرمانروایی ملکه‌های سایبر'
-      },
-      footer: {
-        about: {
-          title: 'درباره IRNFT',
-          description: 'IRNFT یک پلتفرم منحصر به فرد برای مجموعه‌های هنر دیجیتال است، جایی که هر اثر ، داستان خود را روایت می‌کند.'
-        },
-        quickLinks: {
-          title: 'دسترسی سریع',
-          home: 'خانه',
-          collections: 'کالکشن‌ها',
-          marketplace: 'بازار',
-          news: 'اخبار',
-          dashboard: 'داشبورد'
-        },
-        support: {
-          title: 'پشتیبانی',
-          faq: 'سوالات متداول',
-          terms: 'قوانین و مقررات',
-          privacy: 'حریم خصوصی',
-          contact: 'تماس با ما'
-        },
-        newsletter: {
-          title: 'خبرنامه',
-          description: 'برای دریافت آخرین اخبار و پیشنهادات ویژه، در خبرنامه ما عضو شوید.',
-          placeholder: 'ایمیل خود را وارد کنید',
-          subscribe: 'عضویت'
-        },
-        copyright: '© ۱۴۰۳ IRNFT. تمامی حقوق محفوظ است.'
-      }
+  const handleAuthSuccess = () => {
+    setIsAuthenticated(true)
+    setShowAuth(false)
+  }
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut()
+      setIsAuthenticated(false)
+      window.location.href = '/'
+    } catch (error) {
+      console.error('Error logging out:', error)
     }
   }
 
-  const t = translations[language]
+  const handleConnectWallet = async () => {
+    try {
+      if (!isAuthenticated) {
+        setMessage({
+          text: 'لطفاً ابتدا وارد حساب کاربری خود شوید',
+          type: 'warning'
+        });
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 3000);
+        return;
+      }
 
-  return (
-    <div className="app">
-      {/* Navigation */}
+      const walletData = await connectWallet();
+      if (walletData) {
+        setWalletConnected(true);
+        setWalletAddress(walletData.address);
+        setWalletBalance(walletData.balance);
+        setMessage({
+          text: 'کیف پول با موفقیت متصل شد',
+          type: 'success'
+        });
+      }
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+      setMessage({
+        text: 'خطا در اتصال کیف پول',
+        type: 'error'
+      });
+    }
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 3000);
+  };
+
+  const handleDisconnectWallet = async () => {
+    try {
+      await disconnectWallet();
+      setWalletConnected(false);
+      setWalletAddress('');
+      setWalletBalance('');
+      setMessage({
+        text: 'کیف پول قطع شد',
+        type: 'info'
+      });
+    } catch (error) {
+      console.error('Error disconnecting wallet:', error);
+      setMessage({
+        text: 'خطا در قطع اتصال کیف پول',
+        type: 'error'
+      });
+    }
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 3000);
+  };
+
+  const Navigation = () => (
+    <>
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-left">
           <a href="/" className="nav-logo">
-            <img src="/images/logo/Logo.png" alt="IRNFT Logo" />
+            <img src={Logo} alt="IRNFT Logo" />
           </a>
           <div className="nav-links">
-            <a href="/" className="nav-link">{t.nav.home}</a>
-            <a href="/collections" className="nav-link">{t.nav.collections}</a>
-            <a href="/marketplace" className="nav-link">{t.nav.marketplace}</a>
-            <a href="/news" className="nav-link">{t.nav.news}</a>
-            <a href="/dashboard" className="nav-link">{t.nav.dashboard}</a>
+            <a href="/" className="nav-link">{language === 'fa' ? 'خانه' : 'Home'}</a>
+            <a href="/collections" className="nav-link">{language === 'fa' ? 'کالکشن‌ها' : 'Collections'}</a>
+            <a href="/marketplace" className="nav-link">{language === 'fa' ? 'بازار' : 'Marketplace'}</a>
+            <a href="/news" className="nav-link">{language === 'fa' ? 'اخبار' : 'News'}</a>
+            {isAuthenticated && (
+              <a href="/dashboard" className="nav-link">{language === 'fa' ? 'داشبورد' : 'Dashboard'}</a>
+            )}
           </div>
         </div>
         
         <div className="nav-right">
           <div className="search-box">
-            <input type="text" placeholder={t.nav.search} />
+            <input type="text" placeholder={language === 'fa' ? 'جستجو...' : 'Search...'} />
           </div>
           <div className="auth-buttons">
-            <button className="connect-wallet-btn">{t.nav.connectWallet}</button>
-            <button className="register-btn">{t.nav.register}</button>
+            {walletConnected ? (
+              <div className="wallet-info">
+                <span className="wallet-address">{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</span>
+                <span className="wallet-balance">{walletBalance} ETH</span>
+                <button onClick={handleDisconnectWallet} className="disconnect-btn">
+                  <i className="fas fa-times"></i>
+                </button>
+              </div>
+            ) : (
+              <button onClick={handleConnectWallet} className="connect-wallet-btn">
+                <i className="fas fa-wallet"></i>
+                {language === 'fa' ? 'اتصال کیف پول' : 'Connect Wallet'}
+              </button>
+            )}
+            {isAuthenticated ? (
+              <button className="logout-btn" onClick={handleLogout}>
+                {language === 'fa' ? 'خروج' : 'Logout'}
+              </button>
+            ) : (
+              <button className="register-btn" onClick={() => setShowAuth(true)}>
+                {language === 'fa' ? 'ثبت نام' : 'Register'}
+              </button>
+            )}
           </div>
           <div className="language-switcher">
             <button 
@@ -180,15 +245,38 @@ function App() {
 
       <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
         <div className="nav-links">
-          <a href="/" className="nav-link">{t.nav.home}</a>
-          <a href="/collections" className="nav-link">{t.nav.collections}</a>
-          <a href="/marketplace" className="nav-link">{t.nav.marketplace}</a>
-          <a href="/news" className="nav-link">{t.nav.news}</a>
-          <a href="/dashboard" className="nav-link">{t.nav.dashboard}</a>
+          <a href="/" className="nav-link">{language === 'fa' ? 'خانه' : 'Home'}</a>
+          <a href="/collections" className="nav-link">{language === 'fa' ? 'کالکشن‌ها' : 'Collections'}</a>
+          <a href="/marketplace" className="nav-link">{language === 'fa' ? 'بازار' : 'Marketplace'}</a>
+          <a href="/news" className="nav-link">{language === 'fa' ? 'اخبار' : 'News'}</a>
+          {isAuthenticated && (
+            <a href="/dashboard" className="nav-link">{language === 'fa' ? 'داشبورد' : 'Dashboard'}</a>
+          )}
         </div>
         <div className="auth-buttons">
-          <button className="connect-wallet-btn">{t.nav.connectWallet}</button>
-          <button className="register-btn">{t.nav.register}</button>
+          {walletConnected ? (
+            <div className="wallet-info">
+              <span className="wallet-address">{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</span>
+              <span className="wallet-balance">{walletBalance} ETH</span>
+              <button onClick={handleDisconnectWallet} className="disconnect-btn">
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+          ) : (
+            <button onClick={handleConnectWallet} className="connect-wallet-btn">
+              <i className="fas fa-wallet"></i>
+              {language === 'fa' ? 'اتصال کیف پول' : 'Connect Wallet'}
+            </button>
+          )}
+          {isAuthenticated ? (
+            <button className="logout-btn" onClick={handleLogout}>
+              {language === 'fa' ? 'خروج' : 'Logout'}
+            </button>
+          ) : (
+            <button className="register-btn" onClick={() => setShowAuth(true)}>
+              {language === 'fa' ? 'ثبت نام' : 'Register'}
+            </button>
+          )}
         </div>
         <div className="language-switcher">
           <button 
@@ -207,8 +295,12 @@ function App() {
       </div>
 
       <div className={`mobile-menu-overlay ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}></div>
+    </>
+  );
 
-      {/* Hero Section */}
+  const HomePage = () => (
+    <>
+      <Navigation />
       <section className="hero">
         <video
           autoPlay
@@ -217,12 +309,12 @@ function App() {
           playsInline
           className="hero-video"
         >
-          <source src="/images/hero/hero-bg.mp4" type="video/mp4" />
+          <source src={HeroVideo} type="video/mp4" />
         </video>
         <div className="hero-content">
-          <h1>{t.hero.title}</h1>
-          <p>{t.hero.subtitle}</p>
-          <button className="cta-button">{t.hero.cta}</button>
+          <h1>{language === 'fa' ? 'به IRNFT خوش آمدید' : 'Welcome to IRNFT'}</h1>
+          <p>{language === 'fa' ? 'مجموعه‌های هنر دیجیتال منحصر به فرد را کشف کنید' : 'Discover Unique Digital Art Collections'}</p>
+          <button className="cta-button">{language === 'fa' ? 'مشاهده کالکشن‌ها' : 'Explore Collections'}</button>
           <div className="hero-features">
             <div className="hero-feature">
               <i className="fas fa-shield-alt"></i>
@@ -240,15 +332,13 @@ function App() {
         </div>
       </section>
 
-      {/* Collections Section */}
       <section className="collections">
         <div className="collections-header">
-          <h2>{t.collections.title}</h2>
+          <h2>{language === 'fa' ? 'کالکشن‌های ویژه' : 'Featured Collections'}</h2>
           <div className="collections-line"></div>
         </div>
         
         <div className="collections-container">
-          {/* Active Collection */}
           <div className="featured-collection">
             <div className="featured-content">
               <div className="featured-text">
@@ -256,7 +346,7 @@ function App() {
                   <span className="status-dot"></span>
                   {language === 'fa' ? 'فعال' : 'Active'}
                 </div>
-                <h3>{t.collections.fatesAndFaces}</h3>
+                <h3>{language === 'fa' ? 'سرنوشت‌ها و چهره‌ها' : 'Fates & Faces'}</h3>
                 <p>{language === 'fa' ? 'مجموعه‌ای منحصر به فرد از 20 NFT با طراحی‌های خیره‌کننده و مفاهیم عمیق' : 'A unique collection of 20 NFTs with stunning designs and deep concepts'}</p>
                 <div className="collection-stats">
                   <div className="stat-item">
@@ -278,32 +368,31 @@ function App() {
                 </button>
               </div>
               <div className="featured-image">
-                <img src="/images/collections/fates-faces.jpg" alt="Fates & Faces" />
+                <img src={FatesFaces} alt="Fates & Faces" />
               </div>
             </div>
           </div>
 
-          {/* Upcoming Collections */}
           <div className="upcoming-collections">
-            <div className="upcoming-card" data-coming-soon={t.collections.comingSoon}>
+            <div className="upcoming-card" data-coming-soon={language === 'fa' ? 'به زودی' : 'Coming Soon'}>
               <div className="card-image">
-                <img src="/images/collections/eclipse-syndicate.jpg" alt="Eclipse Syndicate" />
+                <img src={EclipseSyndicate} alt="Eclipse Syndicate" />
               </div>
               <div className="card-overlay">
                 <div className="card-content">
-                  <h4>{t.collections.eclipseSyndicate}</h4>
+                  <h4>{language === 'fa' ? 'سندیکا خسوف' : 'Eclipse Syndicate'}</h4>
                   <p>{language === 'fa' ? 'مجموعه‌ای مرموز از NFT‌های سایه‌ای با داستان‌های منحصر به فرد' : 'A mysterious collection of shadow NFTs with unique stories'}</p>
                 </div>
               </div>
             </div>
 
-            <div className="upcoming-card" data-coming-soon={t.collections.comingSoon}>
+            <div className="upcoming-card" data-coming-soon={language === 'fa' ? 'به زودی' : 'Coming Soon'}>
               <div className="card-image">
-                <img src="/images/collections/neon-sovereigns.jpg" alt="Neon Sovereigns" />
+                <img src={NeonSovereigns} alt="Neon Sovereigns" />
               </div>
               <div className="card-overlay">
                 <div className="card-content">
-                  <h4>{t.collections.neonSovereigns}</h4>
+                  <h4>{language === 'fa' ? 'سلاطین نئون: فرمانروایی ملکه‌های سایبر' : 'Neon Sovereigns: Reign of the Cyber Queens'}</h4>
                   <p>{language === 'fa' ? 'مجموعه‌ای آینده‌نگرانه از NFT‌های سایبرپانک با طراحی‌های نئون' : 'A futuristic collection of cyberpunk NFTs with neon designs'}</p>
                 </div>
               </div>
@@ -312,14 +401,12 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="modern-footer">
         <div className="footer-container">
           <div className="footer-grid">
-            {/* Column 1 */}
             <div className="footer-column">
               <div className="footer-about glass-box">
-                <h3>{t.footer.about.title}</h3>
+                <h3>{language === 'fa' ? 'درباره IRNFT' : 'About IRNFT'}</h3>
                 <p>
                   {language === 'fa' 
                     ? 'پیشگام در عرصه هنر دیجیتال و NFT در ایران، با هدف خلق آینده‌ای درخشان برای هنرمندان.' 
@@ -342,72 +429,70 @@ function App() {
               </div>
             </div>
 
-            {/* Column 2 */}
             <div className="footer-column">
               <div className="footer-links glass-box">
                 <h3>
                   <i className="fas fa-link link-icon"></i>
-                  {t.footer.quickLinks.title}
+                  {language === 'fa' ? 'دسترسی سریع' : 'Quick Links'}
                 </h3>
                 <ul>
                   <li>
                     <a href="/">
                       <i className="fas fa-home"></i>
-                      <span>{t.footer.quickLinks.home}</span>
+                      <span>{language === 'fa' ? 'خانه' : 'Home'}</span>
                     </a>
                   </li>
                   <li>
                     <a href="/collections">
                       <i className="fas fa-images"></i>
-                      <span>{t.footer.quickLinks.collections}</span>
+                      <span>{language === 'fa' ? 'کالکشن‌ها' : 'Collections'}</span>
                     </a>
                   </li>
                   <li>
                     <a href="/marketplace">
                       <i className="fas fa-store"></i>
-                      <span>{t.footer.quickLinks.marketplace}</span>
+                      <span>{language === 'fa' ? 'بازار' : 'Marketplace'}</span>
                     </a>
                   </li>
                   <li>
                     <a href="/news">
                       <i className="fas fa-newspaper"></i>
-                      <span>{t.footer.quickLinks.news}</span>
+                      <span>{language === 'fa' ? 'اخبار' : 'News'}</span>
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* Column 3 */}
             <div className="footer-column">
               <div className="footer-support glass-box">
                 <h3>
                   <i className="fas fa-headset support-icon"></i>
-                  {t.footer.support.title}
+                  {language === 'fa' ? 'پشتیبانی' : 'Support'}
                 </h3>
                 <ul>
                   <li>
                     <a href="/faq">
                       <i className="fas fa-question-circle"></i>
-                      <span>{t.footer.support.faq}</span>
+                      <span>{language === 'fa' ? 'سوالات متداول' : 'FAQ'}</span>
                     </a>
                   </li>
                   <li>
                     <a href="/terms">
                       <i className="fas fa-file-contract"></i>
-                      <span>{t.footer.support.terms}</span>
+                      <span>{language === 'fa' ? 'قوانین و مقررات' : 'Terms of Service'}</span>
                     </a>
                   </li>
                   <li>
                     <a href="/privacy">
                       <i className="fas fa-shield-alt"></i>
-                      <span>{t.footer.support.privacy}</span>
+                      <span>{language === 'fa' ? 'حریم خصوصی' : 'Privacy Policy'}</span>
                     </a>
                   </li>
                   <li>
                     <a href="/contact">
                       <i className="fas fa-envelope"></i>
-                      <span>{t.footer.support.contact}</span>
+                      <span>{language === 'fa' ? 'تماس با ما' : 'Contact Us'}</span>
                     </a>
                   </li>
                 </ul>
@@ -415,14 +500,43 @@ function App() {
             </div>
           </div>
 
-          {/* Copyright */}
           <div className="footer-copyright glass-box">
-            <p>{t.footer.copyright}</p>
+            <p>{language === 'fa' ? '© ۱۴۰۳ IRNFT. تمامی حقوق محفوظ است.' : '© 2024 IRNFT. All rights reserved.'}</p>
           </div>
         </div>
       </footer>
-    </div>
-  )
+    </>
+  );
+
+  return (
+    <Router>
+      <div className="app">
+        {showAuth ? (
+          <Auth 
+            onAuthSuccess={handleAuthSuccess} 
+            onBack={() => setShowAuth(false)}
+          />
+        ) : (
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
+          </Routes>
+        )}
+      </div>
+      {showMessage && (
+        <div className={`message-box ${message.type}`}>
+          {message.text}
+        </div>
+      )}
+    </Router>
+  );
 }
 
-export default App
+export default App;
