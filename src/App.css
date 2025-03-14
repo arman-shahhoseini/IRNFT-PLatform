@@ -1499,7 +1499,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('/src/assets/images/hero/poker-table.jpg') center/cover;
+  background: url('/images/hero/poker-table.jpg') center/cover;
   opacity: 0.05;
   z-index: 1;
 }

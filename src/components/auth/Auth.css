@@ -18,7 +18,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url('/src/assets/images/hero/poker-table.jpg') center/cover;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url('/images/hero/poker-table.jpg') center/cover;
   opacity: 1;
   z-index: -1;
 }
