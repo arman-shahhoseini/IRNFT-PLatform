@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
-import Logo from './assets/images/logo/Logo.png'
-import HeroVideo from './assets/images/hero/hero-bg.mp4'
-import FatesFaces from './assets/images/collections/fates-faces.jpg'
-import EclipseSyndicate from './assets/images/collections/eclipse-syndicate.jpg'
-import NeonSovereigns from './assets/images/collections/neon-sovereigns.jpg'
+import Logo from '/images/logo/Logo.png'
+import HeroVideo from '/images/hero/hero-bg.mp4'
+import FatesFaces from '/images/collections/fates-faces.jpg'
+import EclipseSyndicate from '/images/collections/eclipse-syndicate.jpg'
+import NeonSovereigns from '/images/collections/neon-sovereigns.jpg'
 import Auth from './components/auth/Auth'
 import Dashboard from './components/dashboard/Dashboard'
 import { auth } from './firebase'
@@ -173,84 +173,121 @@ function App() {
     setTimeout(() => setShowMessage(false), 3000);
   };
 
+  const handleLanguageChange = (newLang) => {
+    setLanguage(newLang);
+    localStorage.setItem('language', newLang);
+    document.dir = newLang === 'fa' ? 'rtl' : 'ltr';
+    i18n.changeLanguage(newLang);
+  };
+
   const Navigation = () => (
     <>
-      <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-        <div className="nav-left">
-          <a href="/" className="nav-logo">
-            <img src={Logo} alt="IRNFT Logo" />
-          </a>
-          <div className="nav-links">
-            <a href="/" className="nav-link">{language === 'fa' ? 'خانه' : 'Home'}</a>
-            <a href="/collections" className="nav-link">{language === 'fa' ? 'کالکشن‌ها' : 'Collections'}</a>
-            <a href="/marketplace" className="nav-link">{language === 'fa' ? 'بازار' : 'Marketplace'}</a>
-            <a href="/news" className="nav-link">{language === 'fa' ? 'اخبار' : 'News'}</a>
+      <nav className="dashboard-nav">
+        <div className="dashboard-nav-content">
+          <div className="dashboard-nav-links">
+            <a href="/" className="dashboard-nav-link active">
+              <i className="fas fa-home"></i>
+              <span>{language === 'fa' ? 'خانه' : 'Home'}</span>
+            </a>
+            <a href="/collections" className="dashboard-nav-link">
+              <i className="fas fa-images"></i>
+              <span>{language === 'fa' ? 'کالکشن‌ها' : 'Collections'}</span>
+            </a>
+            <a href="/marketplace" className="dashboard-nav-link">
+              <i className="fas fa-store"></i>
+              <span>{language === 'fa' ? 'بازار' : 'Marketplace'}</span>
+            </a>
+            <a href="/news" className="dashboard-nav-link">
+              <i className="fas fa-newspaper"></i>
+              <span>{language === 'fa' ? 'اخبار' : 'News'}</span>
+            </a>
             {isAuthenticated && (
-              <a href="/dashboard" className="nav-link">{language === 'fa' ? 'داشبورد' : 'Dashboard'}</a>
+              <a href="/dashboard" className="dashboard-nav-link">
+                <i className="fas fa-chart-line"></i>
+                <span>{language === 'fa' ? 'داشبورد' : 'Dashboard'}</span>
+              </a>
             )}
           </div>
-        </div>
-        
-        <div className="nav-right">
-          <div className="search-box">
-            <input type="text" placeholder={language === 'fa' ? 'جستجو...' : 'Search...'} />
-          </div>
-          <div className="auth-buttons">
-            {walletConnected ? (
-              <div className="wallet-info">
-                <span className="wallet-address">{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</span>
-                <span className="wallet-balance">{walletBalance} ETH</span>
-                <button onClick={handleDisconnectWallet} className="disconnect-btn">
-                  <i className="fas fa-times"></i>
-                </button>
-              </div>
-            ) : (
-              <button onClick={handleConnectWallet} className="connect-wallet-btn">
-                <i className="fas fa-wallet"></i>
-                {language === 'fa' ? 'اتصال کیف پول' : 'Connect Wallet'}
-              </button>
-            )}
-            {isAuthenticated ? (
-              <button className="logout-btn" onClick={handleLogout}>
-                {language === 'fa' ? 'خروج' : 'Logout'}
-              </button>
-            ) : (
-              <button className="register-btn" onClick={() => setShowAuth(true)}>
-                {language === 'fa' ? 'ثبت نام' : 'Register'}
-              </button>
-            )}
-          </div>
-          <div className="language-switcher">
-            <button 
-              className={`language-btn ${language === 'fa' ? 'active' : ''}`}
-              onClick={() => setLanguage('fa')}
-            >
-              FA
-            </button>
-            <button 
-              className={`language-btn ${language === 'en' ? 'active' : ''}`}
-              onClick={() => setLanguage('en')}
-            >
-              EN
-            </button>
-          </div>
-        </div>
 
-        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
+          <div className="nav-right">
+            <div className="search-box">
+              <i className="fas fa-search"></i>
+              <input type="text" placeholder={language === 'fa' ? 'جستجو...' : 'Search...'} />
+            </div>
+            <div className="auth-buttons">
+              {walletConnected ? (
+                <div className="wallet-info">
+                  <span className="wallet-address">{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</span>
+                  <span className="wallet-balance">{walletBalance} ETH</span>
+                  <button onClick={handleDisconnectWallet} className="disconnect-btn">
+                    <i className="fas fa-times"></i>
+                  </button>
+                </div>
+              ) : (
+                <button onClick={handleConnectWallet} className="connect-wallet-btn">
+                  <i className="fas fa-wallet"></i>
+                  {language === 'fa' ? 'اتصال کیف پول' : 'Connect Wallet'}
+                </button>
+              )}
+              {isAuthenticated ? (
+                <button className="logout-btn" onClick={handleLogout}>
+                  <i className="fas fa-sign-out-alt"></i>
+                  {language === 'fa' ? 'خروج' : 'Logout'}
+                </button>
+              ) : (
+                <button className="register-btn" onClick={() => setShowAuth(true)}>
+                  <i className="fas fa-user-plus"></i>
+                  {language === 'fa' ? 'ثبت نام' : 'Register'}
+                </button>
+              )}
+            </div>
+            <div className="language-switcher">
+              <button 
+                className={`language-btn ${language === 'fa' ? 'active' : ''}`}
+                onClick={() => handleLanguageChange('fa')}
+              >
+                FA
+              </button>
+              <button 
+                className={`language-btn ${language === 'en' ? 'active' : ''}`}
+                onClick={() => handleLanguageChange('en')}
+              >
+                EN
+              </button>
+            </div>
+          </div>
+
+          <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </nav>
 
       <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
         <div className="nav-links">
-          <a href="/" className="nav-link">{language === 'fa' ? 'خانه' : 'Home'}</a>
-          <a href="/collections" className="nav-link">{language === 'fa' ? 'کالکشن‌ها' : 'Collections'}</a>
-          <a href="/marketplace" className="nav-link">{language === 'fa' ? 'بازار' : 'Marketplace'}</a>
-          <a href="/news" className="nav-link">{language === 'fa' ? 'اخبار' : 'News'}</a>
+          <a href="/" className="nav-link active">
+            <i className="fas fa-home"></i>
+            <span>{language === 'fa' ? 'خانه' : 'Home'}</span>
+          </a>
+          <a href="/collections" className="nav-link">
+            <i className="fas fa-images"></i>
+            <span>{language === 'fa' ? 'کالکشن‌ها' : 'Collections'}</span>
+          </a>
+          <a href="/marketplace" className="nav-link">
+            <i className="fas fa-store"></i>
+            <span>{language === 'fa' ? 'بازار' : 'Marketplace'}</span>
+          </a>
+          <a href="/news" className="nav-link">
+            <i className="fas fa-newspaper"></i>
+            <span>{language === 'fa' ? 'اخبار' : 'News'}</span>
+          </a>
           {isAuthenticated && (
-            <a href="/dashboard" className="nav-link">{language === 'fa' ? 'داشبورد' : 'Dashboard'}</a>
+            <a href="/dashboard" className="nav-link">
+              <i className="fas fa-chart-line"></i>
+              <span>{language === 'fa' ? 'داشبورد' : 'Dashboard'}</span>
+            </a>
           )}
         </div>
         <div className="auth-buttons">
@@ -270,10 +307,12 @@ function App() {
           )}
           {isAuthenticated ? (
             <button className="logout-btn" onClick={handleLogout}>
+              <i className="fas fa-sign-out-alt"></i>
               {language === 'fa' ? 'خروج' : 'Logout'}
             </button>
           ) : (
             <button className="register-btn" onClick={() => setShowAuth(true)}>
+              <i className="fas fa-user-plus"></i>
               {language === 'fa' ? 'ثبت نام' : 'Register'}
             </button>
           )}
@@ -281,13 +320,13 @@ function App() {
         <div className="language-switcher">
           <button 
             className={`language-btn ${language === 'fa' ? 'active' : ''}`}
-            onClick={() => setLanguage('fa')}
+            onClick={() => handleLanguageChange('fa')}
           >
             FA
           </button>
           <button 
             className={`language-btn ${language === 'en' ? 'active' : ''}`}
-            onClick={() => setLanguage('en')}
+            onClick={() => handleLanguageChange('en')}
           >
             EN
           </button>

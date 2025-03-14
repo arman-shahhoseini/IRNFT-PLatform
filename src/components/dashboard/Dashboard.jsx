@@ -151,171 +151,93 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <nav className="nav">
-        <div className="nav-content">
-          <div className="nav-left">
-            <a href="/" className="nav-logo">
-              <img src={Logo} alt="IRNFT Logo" />
+      <nav className="dashboard-nav">
+        <div className="dashboard-nav-content">
+          <div className="dashboard-nav-links">
+            <a href="/" className="dashboard-nav-link">
+              <i className="fas fa-home"></i>
+              <span>{currentLang === 'fa' ? 'خانه' : 'Home'}</span>
             </a>
-            <div className="nav-links">
-              <a href="/" className="nav-link">{currentLang === 'fa' ? 'خانه' : 'Home'}</a>
-              <a href="/collections" className="nav-link">{currentLang === 'fa' ? 'کالکشن‌ها' : 'Collections'}</a>
-              <a href="/marketplace" className="nav-link">{currentLang === 'fa' ? 'بازار' : 'Marketplace'}</a>
-              <a href="/news" className="nav-link">{currentLang === 'fa' ? 'اخبار' : 'News'}</a>
-              <a href="/dashboard" className="nav-link active">{currentLang === 'fa' ? 'داشبورد' : 'Dashboard'}</a>
-            </div>
-          </div>
-          
-          <div className="nav-right">
-            <div className="search-box">
-              <i className="fas fa-search"></i>
-              <input type="text" placeholder={currentLang === 'fa' ? 'جستجو...' : 'Search...'} />
-            </div>
-            <div className="auth-buttons">
-              {walletConnected ? (
-                <div className="wallet-info">
-                  <span className="wallet-address">{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</span>
-                  <span className="wallet-balance">{walletBalance} ETH</span>
-                  <button onClick={handleDisconnectWallet} className="disconnect-btn">
-                    <i className="fas fa-times"></i>
-                  </button>
-                </div>
-              ) : (
-                <button onClick={handleConnectWallet} className="connect-wallet-btn">
-                  <i className="fas fa-wallet"></i>
-                  {currentLang === 'fa' ? 'اتصال کیف پول' : 'Connect Wallet'}
-                </button>
-              )}
-              <button className="logout-btn" onClick={handleLogout}>
-                {currentLang === 'fa' ? 'خروج' : 'Logout'}
-              </button>
-            </div>
-            <div className="language-switcher">
-              <button 
-                className={`language-btn ${currentLang === 'fa' ? 'active' : ''}`}
-                onClick={() => toggleLanguage()}
-              >
-                FA
-              </button>
-              <button 
-                className={`language-btn ${currentLang === 'en' ? 'active' : ''}`}
-                onClick={() => toggleLanguage()}
-              >
-                EN
-              </button>
-            </div>
+            <a href="/collections" className="dashboard-nav-link">
+              <i className="fas fa-images"></i>
+              <span>{currentLang === 'fa' ? 'کالکشن‌ها' : 'Collections'}</span>
+            </a>
+            <a href="/marketplace" className="dashboard-nav-link">
+              <i className="fas fa-store"></i>
+              <span>{currentLang === 'fa' ? 'بازار' : 'Marketplace'}</span>
+            </a>
+            <a href="/news" className="dashboard-nav-link">
+              <i className="fas fa-newspaper"></i>
+              <span>{currentLang === 'fa' ? 'اخبار' : 'News'}</span>
+            </a>
           </div>
 
-          <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
+          <div className="nav-right">
+            {walletConnected ? (
+              <div className="wallet-info">
+                <span className="wallet-address">{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</span>
+                <span className="wallet-balance">{walletBalance} ETH</span>
+                <button onClick={handleDisconnectWallet} className="disconnect-btn">
+                  <i className="fas fa-times"></i>
+                </button>
+              </div>
+            ) : (
+              <button onClick={handleConnectWallet} className="connect-wallet-btn">
+                <i className="fas fa-wallet"></i>
+                {currentLang === 'fa' ? 'اتصال کیف پول' : 'Connect Wallet'}
+              </button>
+            )}
           </div>
         </div>
       </nav>
 
-      <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
-        <div className="nav-links">
-          <a href="/" className="nav-link">{currentLang === 'fa' ? 'خانه' : 'Home'}</a>
-          <a href="/collections" className="nav-link">{currentLang === 'fa' ? 'کالکشن‌ها' : 'Collections'}</a>
-          <a href="/marketplace" className="nav-link">{currentLang === 'fa' ? 'بازار' : 'Marketplace'}</a>
-          <a href="/news" className="nav-link">{currentLang === 'fa' ? 'اخبار' : 'News'}</a>
-          <a href="/dashboard" className="nav-link active">{currentLang === 'fa' ? 'داشبورد' : 'Dashboard'}</a>
-        </div>
-        <div className="auth-buttons">
-          {walletConnected ? (
-            <div className="wallet-info">
-              <span className="wallet-address">{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</span>
-              <span className="wallet-balance">{walletBalance} ETH</span>
-              <button onClick={handleDisconnectWallet} className="disconnect-btn">
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
-          ) : (
-            <button onClick={handleConnectWallet} className="connect-wallet-btn">
-              <i className="fas fa-wallet"></i>
-              {currentLang === 'fa' ? 'اتصال کیف پول' : 'Connect Wallet'}
-            </button>
-          )}
-          <button className="logout-btn" onClick={handleLogout}>
-            {currentLang === 'fa' ? 'خروج' : 'Logout'}
-          </button>
-        </div>
-        <div className="language-switcher">
-          <button 
-            className={`language-btn ${currentLang === 'fa' ? 'active' : ''}`}
-            onClick={() => toggleLanguage()}
-          >
-            FA
-          </button>
-          <button 
-            className={`language-btn ${currentLang === 'en' ? 'active' : ''}`}
-            onClick={() => toggleLanguage()}
-          >
-            EN
-          </button>
-        </div>
-      </div>
-
-      <div className={`mobile-menu-overlay ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}></div>
-
-      <div className="dashboard-grid">
-        <div className="dashboard-card">
-          <h3>
-            <i className="fas fa-user"></i>
-            {currentLang === 'fa' ? 'پروفایل کاربری' : 'User Profile'}
-          </h3>
-          <div className="dashboard-card-content">
-            <p>{currentLang === 'fa' ? 'نام کاربری' : 'Username'}: {user?.username}</p>
-            <p>{currentLang === 'fa' ? 'ایمیل' : 'Email'}: {user?.email}</p>
-            <p>{currentLang === 'fa' ? 'تاریخ عضویت' : 'Join Date'}: {formatDate(user?.createdAt)}</p>
+      <div className="dashboard-content">
+        <div className="dashboard-stats">
+          <div className="stat-box">
+            <i className="fas fa-wallet icon"></i>
+            <h3>{walletBalance || '0.00'} ETH</h3>
+            <p>{currentLang === 'fa' ? 'موجودی کیف پول' : 'Wallet Balance'}</p>
+          </div>
+          <div className="stat-box">
+            <i className="fas fa-image icon"></i>
+            <h3>{totalNFTs}</h3>
+            <p>{currentLang === 'fa' ? 'تعداد NFT‌ها' : 'Total NFTs'}</p>
+          </div>
+          <div className="stat-box">
+            <i className="fas fa-chart-line icon"></i>
+            <h3>{totalValue} ETH</h3>
+            <p>{currentLang === 'fa' ? 'ارزش کل دارایی' : 'Total Value'}</p>
           </div>
         </div>
 
-        <div className="dashboard-card">
-          <h3>
-            <i className="fas fa-chart-bar"></i>
-            {currentLang === 'fa' ? 'آمار کلی' : 'Overview'}
-          </h3>
-          <div className="dashboard-stats">
-            <div className="stat-item">
-              <div className="stat-value">0</div>
-              <div className="stat-label">{currentLang === 'fa' ? 'NFT های من' : 'My NFTs'}</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-value">0</div>
-              <div className="stat-label">{currentLang === 'fa' ? 'تراکنش‌ها' : 'Transactions'}</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-value">0</div>
-              <div className="stat-label">{currentLang === 'fa' ? 'موجودی' : 'Balance'}</div>
+        <div className="dashboard-grid">
+          <div className="dashboard-card">
+            <h3>
+              <i className="fas fa-images"></i>
+              {currentLang === 'fa' ? 'کالکشن‌های من' : 'My Collections'}
+            </h3>
+            <div className="dashboard-card-content">
+              {/* محتوای کالکشن‌ها */}
             </div>
           </div>
-        </div>
 
-        <div className="dashboard-card">
-          <h3>
-            <i className="fas fa-history"></i>
-            {currentLang === 'fa' ? 'آخرین فعالیت‌ها' : 'Recent Activities'}
-          </h3>
-          <div className="dashboard-activity">
-            <div className="activity-item">
-              <div className="activity-icon">
-                <i className="fas fa-user-plus"></i>
-              </div>
-              <div className="activity-content">
-                <div className="activity-title">{currentLang === 'fa' ? 'ثبت نام در پلتفرم' : 'Platform Registration'}</div>
-                <div className="activity-time">{formatDate(user?.createdAt)}</div>
-              </div>
+          <div className="dashboard-card">
+            <h3>
+              <i className="fas fa-store"></i>
+              {currentLang === 'fa' ? 'فروشگاه من' : 'My Store'}
+            </h3>
+            <div className="dashboard-card-content">
+              {/* محتوای فروشگاه */}
             </div>
-            <div className="activity-item">
-              <div className="activity-icon">
-                <i className="fas fa-wallet"></i>
-              </div>
-              <div className="activity-content">
-                <div className="activity-title">{currentLang === 'fa' ? 'اتصال کیف پول' : 'Wallet Connection'}</div>
-                <div className="activity-time">{currentLang === 'fa' ? 'هنوز متصل نشده' : 'Not Connected Yet'}</div>
-              </div>
+          </div>
+
+          <div className="dashboard-card">
+            <h3>
+              <i className="fas fa-history"></i>
+              {currentLang === 'fa' ? 'تاریخچه تراکنش‌ها' : 'Transaction History'}
+            </h3>
+            <div className="dashboard-card-content">
+              {/* محتوای تراکنش‌ها */}
             </div>
           </div>
         </div>
@@ -323,7 +245,7 @@ const Dashboard = () => {
 
       {showMessage && (
         <div className={`message-box ${message.type}`}>
-          <i className={`fas ${message.type === 'success' ? 'fa-check-circle' : message.type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}`}></i>
+          <i className={`fas fa-${message.type === 'success' ? 'check-circle' : message.type === 'error' ? 'times-circle' : 'info-circle'}`}></i>
           {message.text}
         </div>
       )}

@@ -21,10 +21,10 @@ const upcomingDrops = [
   {
     id: 1,
     title: "کالکشن هنر دیجیتال ایران",
-    image: "assets/images/drop1.png",
+    image: "/assets/images/drop1.png",
     artist: {
       name: "علی محمدی",
-      avatar: "assets/images/artist1.png"
+      avatar: "/assets/images/artist1.png"
     },
     timeRemaining: "۲ روز",
     likes: 1234

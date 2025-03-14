@@ -99,10 +99,10 @@ const Hero = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <NFTPreview>
-              <img src="assets/images/featured-nft.png" alt="NFT برتر" />
+              <img src="/assets/images/featured-nft.png" alt="NFT برتر" />
               <NFTInfo>
                 <Artist>
-                  <img src="assets/images/artist-avatar.png" alt="هنرمند" />
+                  <img src="/assets/images/artist-avatar.png" alt="هنرمند" />
                   <span>@هنرمند_برتر</span>
                 </Artist>
                 <Price>

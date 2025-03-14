@@ -22,10 +22,10 @@ const nftData = [
   {
     id: 1,
     title: "رویای دیجیتال",
-    image: "assets/images/nft1.png",
+    image: "/assets/images/nft1.png",
     artist: {
       name: "سارا احمدی",
-      avatar: "assets/images/artist1.png"
+      avatar: "/assets/images/artist1.png"
     },
     price: 2.5,
     category: "هنری"
