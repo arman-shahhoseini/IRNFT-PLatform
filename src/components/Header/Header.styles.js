@@ -6,11 +6,10 @@ export const HeaderContainer = styled.header`
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: ${({ scrolled }) => 
-    scrolled ? 'rgba(10, 12, 10, 0.95)' : 'transparent'};
+  background: rgba(18, 18, 18, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0, 255, 163, 0.1);
-  transition: ${({ theme }) => theme.transitions.default};
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 `;
 
 export const NavContainer = styled.nav`
@@ -20,6 +19,7 @@ export const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow-x: hidden;
 `;
 
 export const LogoWrapper = styled.div`
@@ -45,14 +45,18 @@ export const NavContent = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     position: fixed;
     top: 70px;
-    left: 0;
-    width: 100%;
-    background: ${({ theme }) => theme.colors.darker};
-    padding: 1rem;
+    right: 0;
+    width: 280px;
+    height: calc(100vh - 70px);
+    background: rgba(18, 18, 18, 0.98);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
     flex-direction: column;
-    transform: translateY(${({ isOpen }) => (isOpen ? '0' : '-100%')});
+    transform: translateX(${({ isOpen }) => (isOpen ? '0' : '100%')});
     opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
     transition: ${({ theme }) => theme.transitions.default};
+    border-left: 1px solid rgba(0, 255, 163, 0.1);
+    overflow-y: auto;
   }
 `;
 
@@ -60,11 +64,13 @@ export const NavLinks = styled.ul`
   display: flex;
   gap: 2rem;
   list-style: none;
+  margin-right: auto;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     flex-direction: column;
     width: 100%;
     gap: 1rem;
+    margin-right: 0;
   }
 `;
 
@@ -77,6 +83,7 @@ export const NavLink = styled.a`
   padding: 0.5rem 1rem;
   border-radius: 8px;
   transition: ${({ theme }) => theme.transitions.default};
+  border: 1px solid transparent;
 
   svg {
     font-size: 1.2rem;
@@ -86,6 +93,7 @@ export const NavLink = styled.a`
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
     background: rgba(0, 255, 163, 0.1);
+    border-color: rgba(0, 255, 163, 0.2);
 
     svg {
       transform: translateY(-2px);
@@ -95,6 +103,16 @@ export const NavLink = styled.a`
   &.active {
     color: ${({ theme }) => theme.colors.primary};
     background: rgba(0, 255, 163, 0.15);
+    border-color: rgba(0, 255, 163, 0.3);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    
+    &:hover {
+      transform: translateX(-5px);
+    }
   }
 `;
 
@@ -175,6 +193,7 @@ export const MenuToggle = styled.button`
   border: none;
   cursor: pointer;
   padding: 0.5rem;
+  z-index: 1001;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     display: block;
@@ -199,6 +218,33 @@ export const MenuToggle = styled.button`
     &:nth-child(3) {
       transform: ${({ isOpen }) => isOpen ? 'rotate(-45deg) translate(7px, -6px)' : 'none'};
     }
+  }
+`;
+
+export const WalletButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(0, 255, 163, 0.1);
+  border: 1px solid rgba(0, 255, 163, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+
+  svg {
+    font-size: 1.2rem;
+    color: #00ff9d;
+  }
+
+  &:hover {
+    background: rgba(0, 255, 163, 0.15);
+    border-color: rgba(0, 255, 163, 0.3);
+    transform: translateX(-5px);
   }
 `;
 
