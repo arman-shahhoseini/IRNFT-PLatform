@@ -1,165 +1,114 @@
-# IRNFT - پلتفرم NFT ایرانی
+# IRNFT - پلتفرم NFT ایرانی 🚀
 
-پلتفرم NFT ایرانی یک وب‌سایت برای خرید، فروش و مدیریت توکن‌های غیرقابل تعویض (NFT) است.
+<div align="center">
+  <img src="public/images/logo.png" alt="IRNFT Logo" width="200"/>
+</div>
 
-## ویژگی‌ها
+<div align="center">
+  <p>پلتفرم پیشرو NFT ایرانی برای خرید، فروش و مدیریت توکن‌های غیرقابل تعویض</p>
+</div>
 
-- احراز هویت با ایمیل و گوگل
-- اتصال کیف پول اتریوم
-- نمایش موجودی و NFT های کاربر
-- ثبت فعالیت‌های اخیر
-- پشتیبانی از زبان‌های فارسی و انگلیسی
-- رابط کاربری زیبا و واکنش‌گرا
+<div align="center">
+  
+  ![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat-square&logo=react)
+  ![Vite](https://img.shields.io/badge/Vite-4.x-646CFF?style=flat-square&logo=vite)
+  ![Firebase](https://img.shields.io/badge/Firebase-9.x-FFCA28?style=flat-square&logo=firebase)
+  ![Supabase](https://img.shields.io/badge/Supabase-2.x-3ECF8E?style=flat-square&logo=supabase)
+  ![Web3](https://img.shields.io/badge/Web3-1.x-F16822?style=flat-square&logo=ethereum)
+  
+</div>
 
-## تکنولوژی‌ها
+## ✨ ویژگی‌ها
 
-- React.js
-- Vite
-- Firebase
-- i18next
-- React Router
-- Font Awesome
-- Vazir Font
+- **احراز هویت پیشرفته**: ورود با ایمیل/رمز عبور و گوگل
+- **اتصال کیف پول‌های متعدد**: MetaMask، TrustWallet و WalletConnect
+- **داشبورد کاربری**: مدیریت NFT ها و مشاهده فعالیت‌ها
+- **بازارچه**: خرید و فروش NFT با امنیت بالا
+- **پشتیبانی کامل از زبان فارسی**: رابط کاربری کاملاً فارسی
+- **طراحی واکنش‌گرا**: تجربه کاربری عالی در تمام دستگاه‌ها
+- **امنیت بالا**: اتصال امن به بلاکچین و مدیریت داده‌ها
 
-## نصب و اجرا
+## 🛠️ تکنولوژی‌ها
 
-1. کلون کردن پروژه:
+- **فرانت‌اند**: React.js، Vite، React Router، i18next
+- **استایل**: CSS، SASS
+- **بک‌اند**: Firebase، Supabase
+- **بلاکچین**: Web3.js، Ethers.js
+- **احراز هویت**: Firebase Auth، Supabase Auth، Web3 Wallets
+
+## 🚀 نصب و راه‌اندازی
+
+### پیش‌نیازها
+
+- Node.js نسخه 14.x یا بالاتر
+- NPM نسخه ۶.x یا بالاتر
+- حساب Firebase و Supabase
+
+### مراحل نصب
+
+1. **کلون کردن پروژه**:
 ```bash
-git clone https://github.com/yourusername/irnft.git
-cd irnft
+git clone https://github.com/arman-shahhoseini/IRNFT-Platform.git
+cd IRNFT-Platform
 ```
 
-2. نصب وابستگی‌ها:
+2. **نصب وابستگی‌ها**:
 ```bash
 npm install
 ```
 
-3. ایجاد فایل `.env` و تنظیم متغیرهای محیطی:
-```env
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-```
+3. **تنظیم متغیرهای محیطی**:
+   - فایل `.env.example` را به `.env` تغییر نام دهید
+   - مقادیر متغیرها را با اطلاعات خود پر کنید
 
-4. اجرای پروژه در محیط توسعه:
+4. **اجرای پروژه در محیط توسعه**:
 ```bash
 npm run dev
 ```
 
-5. ساخت نسخه تولید:
-```bash
-npm run build
-```
-
-## ساختار پروژه
+## 📁 ساختار پروژه
 
 ```
-irnft/
-├── src/
-│   ├── assets/
-│   │   ├── components/
-│   │   │   ├── auth/
-│   │   │   └── dashboard/
-│   │   ├── firebase/
-│   │   ├── i18n/
-│   │   ├── utils/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── public/
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
+IRNFT-Platform/
+├── public/             # فایل‌های استاتیک
+├── src/                # کد اصلی پروژه
+│   ├── api/            # سرویس‌های API
+│   ├── assets/         # تصاویر و استایل‌ها
+│   ├── components/     # کامپوننت‌های React
+│   ├── contexts/       # Context های React
+│   ├── firebase/       # پیکربندی Firebase
+│   ├── pages/          # صفحات اصلی
+│   ├── translations/   # فایل‌های ترجمه
+│   ├── utils/          # توابع و ابزارهای کمکی
+│   ├── App.jsx         # کامپوننت اصلی
+│   └── main.jsx        # نقطه ورود برنامه
+└── README.md           # مستندات
 ```
 
-## مشارکت
+## 🔧 متغیرهای محیطی
 
-برای مشارکت در پروژه:
+```env
+# API
+VITE_APP_API_URL=http://localhost:5000/api
 
-1. فورک کردن پروژه
-2. ایجاد شاخه جدید (`git checkout -b feature/amazing-feature`)
-3. کامیت تغییرات (`git commit -m 'Add some amazing feature'`)
-4. پوش کردن به شاخه (`git push origin feature/amazing-feature`)
-5. باز کردن یک Pull Request
+# Firebase
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
 
-## مجوز
+# Supabase
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# بلاکچین
+VITE_CONTRACT_ADDRESS=your_contract_address
+VITE_NETWORK_CHAIN_ID=11155111
+VITE_IPFS_GATEWAY=https://ipfs.io/ipfs/
+```
+
+## 📄 مجوز
 
 این پروژه تحت مجوز MIT منتشر شده است. برای اطلاعات بیشتر به فایل [LICENSE](LICENSE) مراجعه کنید.
-
-## تماس
-
-- ایمیل: your.email@example.com
-- وب‌سایت: https://your-website.com
-- توییتر: [@yourusername](https://twitter.com/yourusername)
-
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-## پیاده‌سازی احراز هویت با Supabase
-
-این پروژه از Supabase برای مدیریت احراز هویت استفاده می‌کند. Supabase یک پلتفرم بک‌اند ابری است که امکانات زیر را فراهم می‌کند:
-
-- احراز هویت ایمیل/رمز عبور
-- ورود با گوگل و سایر شبکه‌های اجتماعی
-- مدیریت کاربران
-- دیتابیس Postgres
-- ذخیره‌سازی فایل
-
-### تنظیمات اولیه
-
-1. **ایجاد حساب Supabase**:
-   - به [supabase.com](https://supabase.com) بروید و یک حساب ایجاد کنید
-   - یک پروژه جدید ایجاد کنید
-   - کلید‌های دسترسی (`URL` و `anon key`) را از پنل پروژه خود کپی کنید
-
-2. **تنظیم متغیرهای محیطی**:
-   - فایل `.env` را در ریشه پروژه ایجاد کنید (یا `.env.example` را کپی کنید)
-   - متغیرهای زیر را تنظیم کنید:
-   ```
-   VITE_SUPABASE_URL=YOUR_SUPABASE_URL
-   VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
-   ```
-
-3. **فعال‌سازی روش‌های ورود**:
-   - در پنل Supabase به بخش Authentication > Providers بروید
-   - ورود با ایمیل/رمز عبور را فعال کنید
-   - برای ورود با گوگل، Client ID و Client Secret را از [Google Cloud Console](https://console.cloud.google.com) دریافت و تنظیم کنید
-
-### استفاده از امکانات احراز هویت
-
-برای احراز هویت کاربران، از هوک `useSupabaseAuth` استفاده کنید:
-
-```jsx
-import { useSupabaseAuth } from '../contexts/SupabaseAuthContext';
-
-function MyComponent() {
-  const { 
-    user, 
-    loading, 
-    signInWithEmail, 
-    signUpWithEmail, 
-    signInWithGoogle, 
-    signOut 
-  } = useSupabaseAuth();
-
-  // استفاده از توابع احراز هویت
-}
-```
-
-### مستندات بیشتر
-
-- [مستندات احراز هویت Supabase](https://supabase.com/docs/guides/auth)
-- [مستندات React Supabase](https://supabase.com/docs/reference/javascript/auth-signinwithpassword)

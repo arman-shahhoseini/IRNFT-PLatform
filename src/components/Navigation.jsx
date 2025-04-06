@@ -116,16 +116,18 @@ const Navigation = () => {
 
         <div className="nav-end">
           <div className="auth-buttons">
-            {isConnected ? (
-              <button className="wallet-btn connected" onClick={disconnectWallet}>
-                <FaWallet />
-                <span>{address && address.length >= 10 ? `${address.slice(0, 6)}...${address.slice(-4)}` : address}</span>
-              </button>
-            ) : (
-              <button className="wallet-btn" onClick={showWalletConnectDialog}>
-                <FaWallet />
-                <span>اتصال کیف پول</span>
-              </button>
+            {(!isMobile || (isMobile && user)) && (
+              isConnected ? (
+                <button className="wallet-btn connected" onClick={disconnectWallet}>
+                  <FaWallet />
+                  <span>{address && address.length >= 10 ? `${address.slice(0, 6)}...${address.slice(-4)}` : address}</span>
+                </button>
+              ) : (
+                <button className="wallet-btn" onClick={showWalletConnectDialog}>
+                  <FaWallet />
+                  <span>اتصال کیف پول</span>
+                </button>
+              )
             )}
 
             {user ? (
@@ -199,10 +201,23 @@ const Navigation = () => {
             <h3 className="section-title account-title">حساب کاربری</h3>
             <div className="auth-buttons-mobile">
               {user ? (
-                <button className="mobile-auth-btn logout" onClick={handleLogout}>
-                  <FaSignInAlt />
-                  <span>خروج</span>
-                </button>
+                <>
+                  {isConnected ? (
+                    <button className="mobile-auth-btn wallet connected" onClick={disconnectWallet}>
+                      <FaWallet />
+                      <span>قطع اتصال کیف پول</span>
+                    </button>
+                  ) : (
+                    <button className="mobile-auth-btn wallet" onClick={showWalletConnectDialog}>
+                      <FaWallet />
+                      <span>اتصال کیف پول</span>
+                    </button>
+                  )}
+                  <button className="mobile-auth-btn logout" onClick={handleLogout}>
+                    <FaSignInAlt />
+                    <span>خروج</span>
+                  </button>
+                </>
               ) : (
                 <>
                   <Link to="/login" className="mobile-auth-btn login" onClick={() => setIsMenuOpen(false)}>
