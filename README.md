@@ -1,7 +1,7 @@
 # IRNFT - پلتفرم NFT ایرانی 🚀
 
 <div align="center">
-  <img src="public/images/logo.png" alt="IRNFT Logo" width="200"/>
+  <img src="public/images/logo/Logo.png" alt="IRNFT Logo" width="200"/>
 </div>
 
 <div align="center">
