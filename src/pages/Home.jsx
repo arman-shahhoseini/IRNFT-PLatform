@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Logo from '/images/logo/Logo.png';
 import HeroVideo from '/images/hero/hero-bg.mp4';
@@ -8,6 +8,11 @@ import NeonSovereigns from '/images/collections/neon-sovereigns.jpg';
 
 const Home = () => {
   const { t } = useTranslation();
+  const collectionsRef = useRef(null);
+
+  const scrollToCollections = () => {
+    collectionsRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="home-page">
@@ -24,7 +29,7 @@ const Home = () => {
         <div className="hero-content">
           <h1>{t('welcome_to_irnft')}</h1>
           <p>{t('discover_unique_nfts')}</p>
-          <button className="cta-button">{t('explore_collections')}</button>
+          <button className="cta-button" onClick={scrollToCollections}>{t('explore_collections')}</button>
           <div className="hero-features">
             <div className="hero-feature">
               <i className="fas fa-shield-alt"></i>
@@ -42,7 +47,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="collections">
+      <section className="collections" ref={collectionsRef}>
         <div className="collections-header">
           <h2>{t('featured_collections')}</h2>
           <div className="collections-line"></div>
