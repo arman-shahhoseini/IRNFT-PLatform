@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import Logo from '/images/logo/Logo.png';
 import HeroVideo from '/images/hero/hero-bg.mp4';
 import FatesFaces from '/images/collections/fates-faces.jpg';
@@ -8,10 +9,15 @@ import NeonSovereigns from '/images/collections/neon-sovereigns.jpg';
 
 const Home = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const collectionsRef = useRef(null);
 
   const scrollToCollections = () => {
     collectionsRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleViewCollection = () => {
+    navigate('/fates-faces');
   };
 
   return (
@@ -77,7 +83,7 @@ const Home = () => {
                     <span>{t('10_legend')}</span>
                   </div>
                 </div>
-                <button className="view-collection">
+                <button className="view-collection" onClick={handleViewCollection}>
                   {t('view_collection')}
                   <i className="fas fa-arrow-left"></i>
                 </button>
