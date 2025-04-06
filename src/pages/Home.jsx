@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import Logo from '/images/logo/Logo.png';
 import HeroVideo from '/images/hero/hero-bg.mp4';
 import FatesFaces from '/images/collections/fates-faces.jpg';
@@ -8,6 +9,11 @@ import NeonSovereigns from '/images/collections/neon-sovereigns.jpg';
 
 const Home = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleViewCollection = () => {
+    navigate('/fates-faces');
+  };
 
   return (
     <div className="home-page">
@@ -24,7 +30,7 @@ const Home = () => {
         <div className="hero-content">
           <h1>{t('welcome_to_irnft')}</h1>
           <p>{t('discover_unique_nfts')}</p>
-          <button className="cta-button">{t('explore_collections')}</button>
+          <button className="cta-button" onClick={() => document.querySelector('.collections').scrollIntoView({ behavior: 'smooth' })}>{t('explore_collections')}</button>
           <div className="hero-features">
             <div className="hero-feature">
               <i className="fas fa-shield-alt"></i>
@@ -72,7 +78,7 @@ const Home = () => {
                     <span>{t('10_legend')}</span>
                   </div>
                 </div>
-                <button className="view-collection">
+                <button className="view-collection" onClick={handleViewCollection}>
                   {t('view_collection')}
                   <i className="fas fa-arrow-left"></i>
                 </button>

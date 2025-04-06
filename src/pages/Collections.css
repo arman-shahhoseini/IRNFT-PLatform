@@ -1,0 +1,485 @@
+/* استایل صفحه کالکشن‌ها */
+.collections-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  direction: rtl;
+  font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+}
+
+/* هدر صفحه کالکشن‌ها */
+.collections-hero {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 0;
+  background: linear-gradient(135deg, rgba(43, 43, 53, 0.9), rgba(18, 18, 32, 0.95));
+  border-radius: 16px;
+  color: white;
+}
+
+.collections-hero h1 {
+  margin: 0 0 15px;
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(45deg, #64e8de, #8a64eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.collections-hero p {
+  font-size: 18px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* بخش نمایش کالکشن */
+.collection-showcase {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* هدر کالکشن */
+.collection-header {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.collection-info {
+  flex: 1;
+}
+
+.collection-info h2 {
+  font-size: 32px;
+  margin: 0 0 15px;
+  background: linear-gradient(45deg, #8a64eb, #64e8de);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.collection-info p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.collection-stats {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.stat {
+  background: rgba(138, 100, 235, 0.1);
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: center;
+  flex: 1;
+  border: 1px solid rgba(138, 100, 235, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(138, 100, 235, 0.15);
+}
+
+.stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #8a64eb;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.collection-image {
+  flex: 0 0 40%;
+  max-width: 40%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.collection-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.collection-image img:hover {
+  transform: scale(1.05);
+}
+
+.view-collection-btn {
+  display: inline-block;
+  background: linear-gradient(45deg, #8a64eb, #64e8de);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(138, 100, 235, 0.3);
+  transition: all 0.3s ease;
+}
+
+.view-collection-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(138, 100, 235, 0.4);
+}
+
+/* پروموی تلگرام */
+.telegram-promo-banner {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(120deg, #0088cc, #005580);
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 25px rgba(0, 136, 204, 0.2);
+}
+
+.promo-icon {
+  font-size: 48px;
+  color: white;
+  margin-left: 25px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promo-content {
+  flex: 1;
+}
+
+.promo-content h3 {
+  color: white;
+  font-size: 22px;
+  margin: 0 0 10px;
+}
+
+.promo-content p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  margin: 0 0 15px;
+  line-height: 1.5;
+}
+
+.telegram-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: white;
+  color: #0088cc;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.telegram-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.telegram-button svg {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+/* بخش های نمایش NFT */
+.nft-showcase-section {
+  margin-bottom: 40px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.section-header h3 svg {
+  margin-left: 10px;
+  color: #ff9800;
+}
+
+.legendary-section .section-header h3 svg {
+  color: #8a64eb;
+}
+
+.section-line {
+  flex: 1;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin-right: 15px;
+}
+
+.nft-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* کارت NFT */
+.nft-card {
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nft-card.rare {
+  background: linear-gradient(to bottom, #ffffff, #fff8e1);
+}
+
+.nft-card.legendary {
+  background: linear-gradient(to bottom, #ffffff, #f3e5f5);
+  box-shadow: 0 10px 25px rgba(138, 100, 235, 0.15);
+  border: 1px solid rgba(138, 100, 235, 0.15);
+}
+
+.nft-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.nft-card.legendary:hover {
+  box-shadow: 0 15px 30px rgba(138, 100, 235, 0.25);
+}
+
+.nft-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ff9800;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  box-shadow: 0 3px 10px rgba(255, 152, 0, 0.3);
+}
+
+.nft-card.legendary .nft-badge {
+  background-color: #8a64eb;
+  box-shadow: 0 3px 10px rgba(138, 100, 235, 0.3);
+}
+
+.nft-badge svg {
+  margin-left: 5px;
+}
+
+.nft-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.nft-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.nft-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.nft-card:hover .nft-image-container img {
+  transform: scale(1.1);
+}
+
+.nft-card:hover .nft-overlay {
+  opacity: 1;
+}
+
+.view-details-btn {
+  background-color: white;
+  color: #333;
+  padding: 8px 15px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #8a64eb;
+  color: white;
+}
+
+.nft-info {
+  padding: 15px;
+}
+
+.nft-info h4 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.nft-level {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #555;
+}
+
+.nft-card.legendary .nft-level {
+  background-color: rgba(138, 100, 235, 0.1);
+  color: #8a64eb;
+}
+
+/* بخش نحوه دریافت */
+.how-to-get-section {
+  display: flex;
+  align-items: flex-start;
+  background-color: rgba(138, 100, 235, 0.05);
+  border-radius: 16px;
+  padding: 25px;
+  margin-top: 50px;
+  border: 1px solid rgba(138, 100, 235, 0.1);
+}
+
+.info-icon {
+  font-size: 30px;
+  color: #8a64eb;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-content h3 {
+  margin: 0 0 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.info-content p {
+  margin: 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+.info-content a {
+  color: #8a64eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.info-content a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .collection-header {
+    flex-direction: column;
+  }
+
+  .collection-image {
+    max-width: 100%;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .collections-page {
+    padding: 15px;
+  }
+
+  .collections-hero {
+    padding: 30px 15px;
+  }
+
+  .collection-showcase {
+    padding: 20px;
+  }
+
+  .collection-stats {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .stat {
+    flex: 1 0 40%;
+  }
+
+  .telegram-promo-banner {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .promo-icon {
+    margin: 0 0 15px;
+  }
+
+  .nft-showcase-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nft-showcase-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .stat {
+    flex: 100%;
+  }
+} 

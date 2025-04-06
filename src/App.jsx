@@ -16,6 +16,8 @@ import UserProfile from './pages/UserProfile';
 import Dashboard from './pages/Dashboard';
 import VerifyEmail from './pages/VerifyEmail';
 import NotFound from './pages/NotFound';
+import FatesFaces from './pages/FatesFaces';
+import Favorites from './pages/Favorites';
 import './utils/toast.css';
 import './App.css';
 import './i18n';
@@ -68,6 +70,8 @@ function App() {
             {/* صفحات عمومی */}
             <Route path="/" element={<Home />} />
             <Route path="/collections" element={<Collections />} />
+            <Route path="/fates-faces" element={<FatesFaces />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/news" element={<News />} />
             <Route path="/support" element={<Support />} />
