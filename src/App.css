@@ -3,7 +3,32 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Vazir', sans-serif;
+  font-family: 'Vazir', 'IRANSans', 'Tahoma', sans-serif;
+}
+
+/* اضافه کردن فونت وزیر */
+@font-face {
+  font-family: 'Vazir';
+  src: url('/fonts/Vazir.eot');
+  src: url('/fonts/Vazir.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Vazir.woff2') format('woff2'),
+       url('/fonts/Vazir.woff') format('woff'),
+       url('/fonts/Vazir.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('/fonts/Vazir-Bold.eot');
+  src: url('/fonts/Vazir-Bold.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Vazir-Bold.woff2') format('woff2'),
+       url('/fonts/Vazir-Bold.woff') format('woff'),
+       url('/fonts/Vazir-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -47,7 +72,28 @@ body {
 .app {
   min-height: 100vh;
   background: var(--gradient-dark);
-  padding-top: 70px; /* برای جلوگیری از پوشیده شدن محتوا توسط ناوبار ثابت */
+  padding-top: 0; /* تغییر از 70px به 0 چون هدر را جداگانه اضافه کردیم */
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.main-content {
+  min-height: calc(100vh - 70px);
+  padding-top: 80px; /* برای فاصله زیر هدر */
+  width: 100%; /* عرض 100% */
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 1rem;
+  }
 }
 
 /* Navigation Styles */
@@ -91,12 +137,15 @@ body {
   background-color: var(--background-dark) !important;
   border-right: 1px solid var(--border-color) !important;
   backdrop-filter: blur(10px) !important;
+  width: 100% !important;
+  max-width: 400px !important;
 }
 
 .MuiListItem-root {
-  padding: 12px 24px !important;
+  padding: 16px 24px !important;
   color: var(--text-primary) !important;
   transition: var(--transition-fast) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 .MuiListItem-root:hover {
@@ -146,18 +195,22 @@ body {
 .MuiButton-root {
   text-transform: none !important;
   font-weight: 500 !important;
-  padding: 8px 16px !important;
+  padding: 12px 24px !important;
   border-radius: var(--radius-md) !important;
   transition: var(--transition-fast) !important;
+  width: 100% !important;
+  margin: 8px 0 !important;
 }
 
 .MuiButton-contained {
   background-color: var(--primary-color) !important;
   color: #000000 !important;
+  box-shadow: 0 4px 15px rgba(0, 255, 157, 0.2) !important;
 }
 
 .MuiButton-contained:hover {
   background-color: var(--primary-dark) !important;
+  transform: translateY(-2px) !important;
 }
 
 .MuiButton-text {
@@ -214,12 +267,6 @@ body {
 }
 
 /* Responsive Styles */
-@media (max-width: 1024px) {
-  .MuiToolbar-root {
-    padding: 0 16px !important;
-  }
-}
-
 @media (max-width: 768px) {
   .app {
     padding-top: 64px;
@@ -227,10 +274,20 @@ body {
 
   .MuiToolbar-root {
     min-height: 64px !important;
+    padding: 0 16px !important;
   }
 
   .nav-logo img {
     height: 32px;
+  }
+
+  .MuiButton-root {
+    padding: 10px 20px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .MuiListItem-root {
+    padding: 12px 20px !important;
   }
 }
 
@@ -244,8 +301,12 @@ body {
   }
 
   .MuiButton-root {
-    padding: 6px 12px !important;
+    padding: 8px 16px !important;
     font-size: 0.875rem !important;
+  }
+
+  .MuiListItem-root {
+    padding: 10px 16px !important;
   }
 }
 
@@ -1333,6 +1394,8 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-top: -80px; /* اضافه کردن مارجین منفی برای حذف فاصله */
+  padding-top: 80px; /* پدینگ برای جلوگیری از پوشش محتوا توسط نوار */
 }
 
 .hero-video {
@@ -2818,6 +2881,109 @@ body {
   .language-option {
     padding: 0.7rem;
     font-size: 0.9rem;
+  }
+}
+
+/* استایل‌های پشتیبانی از RTL */
+.rtl,
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr,
+html[dir="ltr"] body {
+  direction: ltr;
+  text-align: left;
+}
+
+/* تنظیمات کلی برای RTL */
+.rtl .main-content,
+html[dir="rtl"] .main-content {
+  text-align: right;
+}
+
+.ltr .main-content,
+html[dir="ltr"] .main-content {
+  text-align: left;
+}
+
+/* بهبود رسپانسیو بودن نسخه موبایل */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 70px;
+  }
+  
+  .rtl .nav-link,
+  html[dir="rtl"] .nav-link {
+    flex-direction: row-reverse;
+  }
+  
+  .rtl .auth-btn,
+  html[dir="rtl"] .auth-btn,
+  .rtl .wallet-btn,
+  html[dir="rtl"] .wallet-btn {
+    flex-direction: row-reverse;
+    padding: 0.5rem 0.8rem;
+  }
+  
+  .rtl .hamburger,
+  html[dir="rtl"] .hamburger {
+    margin-right: 0;
+    margin-left: 0.5rem;
+  }
+}
+
+/* تنظیمات خاص نسخه موبایل کوچک */
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 60px;
+  }
+  
+  .rtl .auth-btn,
+  html[dir="rtl"] .auth-btn,
+  .rtl .wallet-btn,
+  html[dir="rtl"] .wallet-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  
+  .rtl .nav-links,
+  html[dir="rtl"] .nav-links {
+    gap: 0.25rem;
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 18px;
+  position: relative;
+}
+
+.loading-container:after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 255, 157, 0.2);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 20px);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 

@@ -107,3 +107,59 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## پیاده‌سازی احراز هویت با Supabase
+
+این پروژه از Supabase برای مدیریت احراز هویت استفاده می‌کند. Supabase یک پلتفرم بک‌اند ابری است که امکانات زیر را فراهم می‌کند:
+
+- احراز هویت ایمیل/رمز عبور
+- ورود با گوگل و سایر شبکه‌های اجتماعی
+- مدیریت کاربران
+- دیتابیس Postgres
+- ذخیره‌سازی فایل
+
+### تنظیمات اولیه
+
+1. **ایجاد حساب Supabase**:
+   - به [supabase.com](https://supabase.com) بروید و یک حساب ایجاد کنید
+   - یک پروژه جدید ایجاد کنید
+   - کلید‌های دسترسی (`URL` و `anon key`) را از پنل پروژه خود کپی کنید
+
+2. **تنظیم متغیرهای محیطی**:
+   - فایل `.env` را در ریشه پروژه ایجاد کنید (یا `.env.example` را کپی کنید)
+   - متغیرهای زیر را تنظیم کنید:
+   ```
+   VITE_SUPABASE_URL=YOUR_SUPABASE_URL
+   VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+   ```
+
+3. **فعال‌سازی روش‌های ورود**:
+   - در پنل Supabase به بخش Authentication > Providers بروید
+   - ورود با ایمیل/رمز عبور را فعال کنید
+   - برای ورود با گوگل، Client ID و Client Secret را از [Google Cloud Console](https://console.cloud.google.com) دریافت و تنظیم کنید
+
+### استفاده از امکانات احراز هویت
+
+برای احراز هویت کاربران، از هوک `useSupabaseAuth` استفاده کنید:
+
+```jsx
+import { useSupabaseAuth } from '../contexts/SupabaseAuthContext';
+
+function MyComponent() {
+  const { 
+    user, 
+    loading, 
+    signInWithEmail, 
+    signUpWithEmail, 
+    signInWithGoogle, 
+    signOut 
+  } = useSupabaseAuth();
+
+  // استفاده از توابع احراز هویت
+}
+```
+
+### مستندات بیشتر
+
+- [مستندات احراز هویت Supabase](https://supabase.com/docs/guides/auth)
+- [مستندات React Supabase](https://supabase.com/docs/reference/javascript/auth-signinwithpassword)

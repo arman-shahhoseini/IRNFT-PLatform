@@ -4,9 +4,10 @@ import { auth, db } from '../../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { connectWallet, disconnectWallet, checkWalletConnection } from '../../utils/wallet';
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import Logo from '../../assets/images/logo/Logo.png';
 import './Dashboard.css';
+import Swal from 'sweetalert2';
 
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
@@ -20,8 +21,6 @@ const Dashboard = () => {
   const [totalValue, setTotalValue] = useState(0);
   const [recentActivities, setRecentActivities] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showMessage, setShowMessage] = useState(false);
-  const [message, setMessage] = useState({ text: '', type: '' });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState(localStorage.getItem('language') || 'fa');
 
@@ -68,46 +67,115 @@ const Dashboard = () => {
 
   const handleConnectWallet = async () => {
     try {
+      if (!user) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'توجه!',
+          text: 'لطفا ابتدا وارد حساب کاربری خود شوید',
+          confirmButtonText: 'تایید',
+          rtl: true,
+          background: '#1a1a2e',
+          color: '#ffffff',
+          confirmButtonColor: '#00ff9d'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate('/login');
+          }
+        });
+        return;
+      }
+      
+      Swal.fire({
+        title: 'در حال اتصال...',
+        text: 'لطفاً MetaMask خود را باز کنید',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        background: '#1a1a2e',
+        color: '#ffffff',
+        rtl: true
+      });
+      
       const walletData = await connectWallet();
+      
+      Swal.close();
+      
       if (walletData) {
         setWalletConnected(true);
         setWalletAddress(walletData.address);
         setWalletBalance(walletData.balance);
-        setMessage({
-          text: currentLang === 'fa' ? 'کیف پول با موفقیت متصل شد' : 'Wallet connected successfully',
-          type: 'success'
-        });
+        
+        if (user) {
+          const userRef = doc(db, 'users', user.uid);
+          await updateDoc(userRef, {
+            walletAddress: walletData.address,
+            lastWalletConnection: new Date().toISOString()
+          });
+        }
       }
     } catch (error) {
+      Swal.close();
+      
       console.error('Error connecting wallet:', error);
-      setMessage({
-        text: currentLang === 'fa' ? 'خطا در اتصال کیف پول' : 'Error connecting wallet',
-        type: 'error'
+      Swal.fire({
+        icon: 'error',
+        title: 'خطا!',
+        text: 'خطا در اتصال به کیف پول: ' + (error.message || 'خطای ناشناخته'),
+        confirmButtonText: 'تایید',
+        rtl: true,
+        background: '#1a1a2e',
+        color: '#ffffff',
+        confirmButtonColor: '#00ff9d'
       });
     }
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 3000);
   };
 
   const handleDisconnectWallet = async () => {
     try {
+      const result = await Swal.fire({
+        icon: 'question',
+        title: 'قطع اتصال کیف پول',
+        text: 'آیا مطمئن هستید که می‌خواهید اتصال کیف پول را قطع کنید؟',
+        showCancelButton: true,
+        confirmButtonText: 'بله، قطع شود',
+        cancelButtonText: 'انصراف',
+        rtl: true,
+        background: '#1a1a2e',
+        color: '#ffffff',
+        confirmButtonColor: '#00ff9d',
+        cancelButtonColor: '#ff3b3b'
+      });
+      
+      if (!result.isConfirmed) {
+        return;
+      }
+      
       await disconnectWallet();
       setWalletConnected(false);
       setWalletAddress('');
       setWalletBalance('');
-      setMessage({
-        text: currentLang === 'fa' ? 'کیف پول قطع شد' : 'Wallet disconnected',
-        type: 'info'
-      });
+      
+      if (user) {
+        const userRef = doc(db, 'users', user.uid);
+        await updateDoc(userRef, {
+          walletAddress: null,
+          lastWalletDisconnection: new Date().toISOString()
+        });
+      }
     } catch (error) {
       console.error('Error disconnecting wallet:', error);
-      setMessage({
-        text: currentLang === 'fa' ? 'خطا در قطع اتصال کیف پول' : 'Error disconnecting wallet',
-        type: 'error'
+      Swal.fire({
+        icon: 'error',
+        title: 'خطا!',
+        text: 'خطا در قطع اتصال کیف پول: ' + (error.message || 'خطای ناشناخته'),
+        confirmButtonText: 'تایید',
+        rtl: true,
+        background: '#1a1a2e',
+        color: '#ffffff',
+        confirmButtonColor: '#00ff9d'
       });
     }
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 3000);
   };
 
   const handleLogout = async () => {
@@ -242,13 +310,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      {showMessage && (
-        <div className={`message-box ${message.type}`}>
-          <i className={`fas fa-${message.type === 'success' ? 'check-circle' : message.type === 'error' ? 'times-circle' : 'info-circle'}`}></i>
-          {message.text}
-        </div>
-      )}
     </div>
   );
 };

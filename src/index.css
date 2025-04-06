@@ -3,12 +3,14 @@
 :root {
   /* Colors */
   --primary-color: #00ff9d;
+  --primary-dark: #00cc7d;
   --secondary-color: #00b8ff;
   --accent-color: #ff00e5;
   --background-dark: #0a0a0a;
-  --background-light: #1a1a1a;
+  --background-light: #121212;
   --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(0, 255, 157, 0.1);
   
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -51,10 +53,14 @@ html {
 }
 
 body {
-  font-family: 'Vazirmatn', sans-serif;
-  line-height: 1.6;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--background-dark);
   color: var(--text-primary);
-  background-color: var(--background-dark);
+  line-height: 1.6;
   direction: rtl;
   overflow-x: hidden;
 }
@@ -66,26 +72,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: var(--primary-color);
   text-decoration: none;
-  transition: var(--transition-fast);
-}
-
-a:hover {
-  color: var(--secondary-color);
+  color: inherit;
 }
 
 button {
   cursor: pointer;
-  border: none;
-  outline: none;
-  font-family: 'Vazirmatn', sans-serif;
-  transition: var(--transition-fast);
+  font-family: inherit;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -93,12 +91,12 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--gradient-primary);
-  border-radius: var(--radius-full);
+  background: var(--primary-color);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gradient-accent);
+  background: var(--primary-dark);
 }
 
 /* Animations */
@@ -135,6 +133,17 @@ button {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -187,23 +196,20 @@ button {
 }
 
 .container {
-  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 1rem;
 }
 
 .section {
-  padding: var(--spacing-xl) 0;
+  padding: 5rem 0;
 }
 
 .section-title {
   font-size: 2.5rem;
   text-align: center;
-  margin-bottom: var(--spacing-lg);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin-bottom: 3rem;
+  color: var(--text-primary);
 }
 
 .section-subtitle {
@@ -233,30 +239,31 @@ button {
 
 /* Button Styles */
 .btn {
-  padding: 0.8rem 2rem;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  transition: var(--transition-fast);
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .btn-primary {
-  background: var(--gradient-primary);
-  color: var(--background-dark);
+  background: var(--primary-color);
+  color: #000;
 }
 
 .btn-primary:hover {
+  background: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-primary);
 }
 
-.btn-outline {
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
 }
 
-.btn-outline:hover {
-  background: var(--primary-color);
-  color: var(--background-dark);
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 /* Grid System */
@@ -314,4 +321,42 @@ button {
   .grid-2, .grid-3, .grid-4 {
     grid-template-columns: 1fr;
   }
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .btn {
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+/* Sweetalert2 custom styles */
+.swal2-popup {
+  font-family: 'Vazirmatn', 'vazir', sans-serif !important;
+}
+
+.swal2-title {
+  font-family: 'Vazirmatn', 'vazir', sans-serif !important;
+}
+
+.swal2-html-container {
+  font-family: 'Vazirmatn', 'vazir', sans-serif !important;
+}
+
+/* RTL support for Swal */
+html[dir="rtl"] .swal2-popup {
+  direction: rtl;
 }

@@ -4,15 +4,45 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    // Add support for process.env for next-auth compatibility
+    {
+      name: 'process-env-support',
+      config: () => ({
+        define: {
+          'process.env': JSON.stringify(process.env),
+          'process.env.NEXT_PUBLIC_API_URL': JSON.stringify(process.env.VITE_APP_API_URL),
+          'process.env.NEXT_AUTH_URL': JSON.stringify(process.env.NEXT_AUTH_URL || 'http://localhost:3000'),
+          'process.env.NEXT_PUBLIC_URL': JSON.stringify(process.env.VITE_APP_URL),
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+          'process.env.GOOGLE_CLIENT_ID': JSON.stringify(process.env.GOOGLE_CLIENT_ID || ''),
+          'process.env.GOOGLE_CLIENT_SECRET': JSON.stringify(process.env.GOOGLE_CLIENT_SECRET || ''),
+          'process.env.JWT_SECRET': JSON.stringify(process.env.NEXT_AUTH_SECRET || 'DEFAULT_SECRET'),
+          'global': 'globalThis',
+        },
+      }),
+    },
+  ],
   server: {
-    port: 3000,
+    port: 3001,
     host: true,
     strictPort: true,
     watch: {
       usePolling: true,
     },
-    open: true
+    open: true,
+    proxy: {
+      '/api/auth': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('proxy error', err);
+          });
+        },
+      }
+    }
   },
   build: {
     outDir: 'dist',
@@ -45,23 +75,18 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@assets': path.resolve(__dirname, './public/assets'),
       '@components': path.resolve(__dirname, './src/components'),
-      '@utils': path.resolve(__dirname, './src/utils')
+      '@utils': path.resolve(__dirname, './src/utils'),
+      'buffer': 'buffer/'
     }
   },
   optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'firebase/app',
-      'firebase/auth',
-      'firebase/firestore',
-      'firebase/storage',
-      'firebase/analytics'
-    ],
     esbuildOptions: {
+      define: {
+        global: 'globalThis'
+      },
       target: 'es2020'
-    }
+    },
+    include: ['buffer', 'ethers']
   },
   base: '/',
   publicDir: 'public'

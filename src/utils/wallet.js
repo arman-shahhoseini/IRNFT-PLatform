@@ -1,4 +1,13 @@
 import { ethers } from 'ethers';
+import Swal from 'sweetalert2';
+
+// تنظیم استایل سفارشی برای SweetAlert2 طبق تم سایت
+const swalCustomStyle = {
+  background: '#1a1a2e',
+  color: '#ffffff',
+  confirmButtonColor: '#00ff9d',
+  cancelButtonColor: '#1a1a2e'
+};
 
 const SUPPORTED_NETWORKS = {
   1: {
@@ -27,6 +36,14 @@ const SUPPORTED_NETWORKS = {
 export const connectWallet = async (targetChainId = 1) => {
   try {
     if (!window.ethereum) {
+      Swal.fire({
+        icon: 'error',
+        title: 'خطا!',
+        text: 'لطفاً MetaMask را نصب کنید',
+        confirmButtonText: 'تایید',
+        rtl: true,
+        ...swalCustomStyle
+      });
       throw new Error('لطفاً MetaMask را نصب کنید');
     }
 
@@ -45,9 +62,25 @@ export const connectWallet = async (targetChainId = 1) => {
             params: [SUPPORTED_NETWORKS[targetChainId]]
           });
         } catch (addError) {
+          Swal.fire({
+            icon: 'error',
+            title: 'خطا!',
+            text: 'خطا در اضافه کردن شبکه',
+            confirmButtonText: 'تایید',
+            rtl: true,
+            ...swalCustomStyle
+          });
           throw new Error('خطا در اضافه کردن شبکه');
         }
       } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'خطا!',
+          text: 'خطا در تغییر شبکه',
+          confirmButtonText: 'تایید',
+          rtl: true,
+          ...swalCustomStyle
+        });
         throw new Error('خطا در تغییر شبکه');
       }
     }
@@ -62,6 +95,14 @@ export const connectWallet = async (targetChainId = 1) => {
     
     // بررسی تطابق شبکه
     if (chainId !== targetChainId) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'هشدار!',
+        text: 'لطفاً شبکه درست را انتخاب کنید',
+        confirmButtonText: 'تایید',
+        rtl: true,
+        ...swalCustomStyle
+      });
       throw new Error('لطفاً شبکه درست را انتخاب کنید');
     }
 
@@ -72,29 +113,145 @@ export const connectWallet = async (targetChainId = 1) => {
       address,
       balance: formattedBalance,
       chainId,
-      network: SUPPORTED_NETWORKS[chainId].chainName
+      network: SUPPORTED_NETWORKS[chainId]?.chainName || 'نامشخص',
+      timestamp: Date.now()
     };
 
     localStorage.setItem('wallet', JSON.stringify(walletData));
 
-    // اضافه کردن event listener برای تغییرات اکانت
-    window.ethereum.on('accountsChanged', () => {
-      window.location.reload();
+    // قابلیت های دسترسی به داده‌ها و اتصال به والت
+    window.walletInfo = walletData;
+
+    // جایگزین event listener های قبلی با روش های بهتر بدون ریلود صفحه
+    // ابتدا event listener های قبلی را حذف می‌کنیم
+    window.ethereum.removeAllListeners('accountsChanged');
+    window.ethereum.removeAllListeners('chainChanged');
+    window.ethereum.removeAllListeners('disconnect');
+
+    // اضافه کردن event listener برای تغییرات اکانت بدون ریلود صفحه
+    window.ethereum.on('accountsChanged', async (accounts) => {
+      if (accounts.length === 0) {
+        // اگر کاربر همه اکانت‌ها را قطع کرد
+        await disconnectWallet();
+        // یک ایونت سفارشی ایجاد می‌کنیم که کامپوننت‌ها بتوانند آن را گوش کنند
+        window.dispatchEvent(new CustomEvent('walletDisconnected'));
+        
+        Swal.fire({
+          icon: 'info',
+          title: 'اطلاع',
+          text: 'کیف پول قطع شد',
+          confirmButtonText: 'تایید',
+          rtl: true,
+          ...swalCustomStyle
+        });
+      } else {
+        // اکانت جدید را بررسی و اطلاعات را بروزرسانی می‌کنیم
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const balance = await provider.getBalance(accounts[0]);
+        const network = await provider.getNetwork();
+        
+        const updatedWalletData = {
+          address: accounts[0],
+          balance: ethers.utils.formatEther(balance),
+          chainId: network.chainId,
+          network: SUPPORTED_NETWORKS[network.chainId]?.chainName || 'نامشخص',
+          timestamp: Date.now()
+        };
+        
+        localStorage.setItem('wallet', JSON.stringify(updatedWalletData));
+        window.walletInfo = updatedWalletData;
+        
+        // یک ایونت سفارشی ایجاد می‌کنیم که کامپوننت‌ها بتوانند آن را گوش کنند
+        window.dispatchEvent(new CustomEvent('walletAccountChanged', { 
+          detail: updatedWalletData 
+        }));
+        
+        Swal.fire({
+          icon: 'success',
+          title: 'موفق!',
+          text: 'حساب کیف پول تغییر کرد',
+          confirmButtonText: 'تایید',
+          rtl: true,
+          ...swalCustomStyle
+        });
+      }
     });
 
-    // اضافه کردن event listener برای تغییرات شبکه
-    window.ethereum.on('chainChanged', () => {
-      window.location.reload();
+    // اضافه کردن event listener برای تغییرات شبکه بدون ریلود صفحه
+    window.ethereum.on('chainChanged', async (chainIdHex) => {
+      const chainIdDec = parseInt(chainIdHex, 16);
+      
+      // اطلاعات کیف پول را با توجه به شبکه جدید بروزرسانی می‌کنیم
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      const balance = await provider.getBalance(address);
+      
+      const updatedWalletData = {
+        address,
+        balance: ethers.utils.formatEther(balance),
+        chainId: chainIdDec,
+        network: SUPPORTED_NETWORKS[chainIdDec]?.chainName || 'نامشخص',
+        timestamp: Date.now()
+      };
+      
+      localStorage.setItem('wallet', JSON.stringify(updatedWalletData));
+      window.walletInfo = updatedWalletData;
+      
+      // یک ایونت سفارشی ایجاد می‌کنیم که کامپوننت‌ها بتوانند آن را گوش کنند
+      window.dispatchEvent(new CustomEvent('walletChainChanged', { 
+        detail: updatedWalletData 
+      }));
+      
+      Swal.fire({
+        icon: 'success',
+        title: 'موفق!',
+        text: 'شبکه تغییر کرد',
+        confirmButtonText: 'تایید',
+        rtl: true,
+        ...swalCustomStyle
+      });
     });
 
     // اضافه کردن event listener برای قطع اتصال
-    window.ethereum.on('disconnect', () => {
-      disconnectWallet();
+    window.ethereum.on('disconnect', async (error) => {
+      await disconnectWallet();
+      // یک ایونت سفارشی ایجاد می‌کنیم که کامپوننت‌ها بتوانند آن را گوش کنند
+      window.dispatchEvent(new CustomEvent('walletDisconnected', { 
+        detail: error 
+      }));
+      
+      Swal.fire({
+        icon: 'info',
+        title: 'اطلاع',
+        text: 'اتصال کیف پول قطع شد',
+        confirmButtonText: 'تایید',
+        rtl: true,
+        ...swalCustomStyle
+      });
+    });
+    
+    // نمایش پیام موفقیت‌آمیز اتصال کیف پول
+    Swal.fire({
+      icon: 'success',
+      title: 'موفق!',
+      text: 'کیف پول شما با موفقیت متصل شد',
+      confirmButtonText: 'تایید',
+      rtl: true,
+      ...swalCustomStyle
     });
 
     return walletData;
   } catch (error) {
     console.error('Error connecting wallet:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'خطا!',
+      text: `خطا در اتصال به کیف پول: ${error.message}`,
+      confirmButtonText: 'تایید',
+      rtl: true,
+      ...swalCustomStyle
+    });
     throw error;
   }
 };
@@ -110,9 +267,26 @@ export const disconnectWallet = async () => {
       window.ethereum.removeAllListeners('disconnect');
     }
     
+    Swal.fire({
+      icon: 'success',
+      title: 'موفق!',
+      text: 'اتصال کیف پول با موفقیت قطع شد',
+      confirmButtonText: 'تایید',
+      rtl: true,
+      ...swalCustomStyle
+    });
+    
     return true;
   } catch (error) {
     console.error('Error disconnecting wallet:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'خطا!',
+      text: `خطا در قطع اتصال کیف پول: ${error.message}`,
+      confirmButtonText: 'تایید',
+      rtl: true,
+      ...swalCustomStyle
+    });
     throw error;
   }
 };
@@ -159,6 +333,14 @@ export const getWalletBalance = async (address) => {
 export const sendTransaction = async (to, amount) => {
   try {
     if (!window.ethereum) {
+      Swal.fire({
+        icon: 'error',
+        title: 'خطا!',
+        text: 'لطفاً MetaMask را نصب کنید',
+        confirmButtonText: 'تایید',
+        rtl: true,
+        ...swalCustomStyle
+      });
       throw new Error('لطفاً MetaMask را نصب کنید');
     }
 
@@ -170,17 +352,75 @@ export const sendTransaction = async (to, amount) => {
     const value = ethers.utils.parseEther(amount);
     
     if (balance.lt(value)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'خطا!',
+        text: 'موجودی کافی نیست',
+        confirmButtonText: 'تایید',
+        rtl: true,
+        ...swalCustomStyle
+      });
       throw new Error('موجودی ناکافی');
     }
+    
+    // نمایش دیالوگ در حال پردازش
+    Swal.fire({
+      title: 'در حال پردازش تراکنش...',
+      text: 'لطفاً MetaMask خود را باز کنید و تراکنش را تأیید کنید',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      background: '#1a1a2e',
+      color: '#ffffff',
+      rtl: true
+    });
     
     const tx = await signer.sendTransaction({
       to,
       value
     });
     
-    return tx;
+    // منتظر تأیید تراکنش می‌مانیم
+    const receipt = await tx.wait();
+    
+    // بستن دیالوگ لودینگ
+    Swal.close();
+    
+    // نمایش دیالوگ موفقیت
+    Swal.fire({
+      icon: 'success',
+      title: 'تراکنش موفق!',
+      text: `تراکنش با موفقیت انجام شد. هش تراکنش: ${tx.hash}`,
+      confirmButtonText: 'تایید',
+      rtl: true,
+      ...swalCustomStyle
+    });
+    
+    return receipt;
   } catch (error) {
     console.error('Error sending transaction:', error);
+    
+    // بستن دیالوگ لودینگ در صورت وجود
+    Swal.close();
+    
+    let errorMsg = 'خطا در انجام تراکنش';
+    
+    if (error.code === 4001) {
+      errorMsg = 'تراکنش توسط کاربر لغو شد';
+    } else if (error.message) {
+      errorMsg = `خطا در انجام تراکنش: ${error.message}`;
+    }
+    
+    Swal.fire({
+      icon: 'error',
+      title: 'خطا!',
+      text: errorMsg,
+      confirmButtonText: 'تایید',
+      rtl: true,
+      ...swalCustomStyle
+    });
+    
     throw error;
   }
 }; 

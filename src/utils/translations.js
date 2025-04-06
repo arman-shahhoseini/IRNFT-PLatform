@@ -9,26 +9,35 @@ export const translations = {
     search: 'جستجو...',
     logout: 'خروج',
     loading: 'در حال بارگذاری...',
-    noActivity: 'هنوز فعالیتی ثبت نشده است',
+    noActivity: 'هنوز فعالیتی ثبت نشده',
 
     // کیف پول
-    connectWallet: 'اتصال کیف پول',
-    walletConnected: 'کیف پول متصل',
-    walletBalance: 'موجودی کیف پول',
-    disconnectWallet: 'قطع اتصال کیف پول',
-    walletNotInstalled: 'لطفاً یک کیف پول مانند MetaMask را نصب کنید',
-    walletConnectionError: 'خطا در اتصال به کیف پول',
-    walletConnectionSuccess: 'کیف پول با موفقیت متصل شد',
-    walletDisconnectionSuccess: 'اتصال کیف پول قطع شد',
-    walletNotConnected: 'لطفاً ابتدا وارد حساب کاربری خود شوید',
+    wallet: {
+      connect: 'اتصال کیف پول',
+      disconnect: 'قطع اتصال',
+      connected: 'کیف پول متصل شد',
+      balance: 'موجودی کیف پول',
+      notInstalled: 'لطفاً یک کیف پول مانند متامسک نصب کنید',
+      connectionError: 'خطا در اتصال به کیف پول',
+      connectionSuccess: 'کیف پول با موفقیت متصل شد',
+      disconnectionSuccess: 'اتصال کیف پول با موفقیت قطع شد',
+      notConnected: 'لطفاً ابتدا وارد شوید'
+    },
+
+    // احراز هویت
+    auth: {
+      login: 'ورود',
+      register: 'ثبت‌نام',
+      logout: 'خروج'
+    },
 
     // داشبورد
     myNFTs: 'NFT های من',
     myStore: 'فروشگاه من',
-    transactionHistory: 'تاریخچه معاملات',
+    transactionHistory: 'تاریخچه تراکنش‌ها',
     recentActivities: 'فعالیت‌های اخیر',
-    products: 'محصول',
-    transactions: 'معامله',
+    products: 'محصولات',
+    transactions: 'تراکنش‌ها',
 
     // پیام‌ها
     success: 'موفقیت',
@@ -38,6 +47,7 @@ export const translations = {
     confirm: 'تایید',
     cancel: 'انصراف'
   },
+
   en: {
     // General
     home: 'Home',
@@ -51,15 +61,24 @@ export const translations = {
     noActivity: 'No activities yet',
 
     // Wallet
-    connectWallet: 'Connect Wallet',
-    walletConnected: 'Wallet Connected',
-    walletBalance: 'Wallet Balance',
-    disconnectWallet: 'Disconnect Wallet',
-    walletNotInstalled: 'Please install a wallet like MetaMask',
-    walletConnectionError: 'Error connecting to wallet',
-    walletConnectionSuccess: 'Wallet connected successfully',
-    walletDisconnectionSuccess: 'Wallet disconnected successfully',
-    walletNotConnected: 'Please login first',
+    wallet: {
+      connect: 'Connect Wallet',
+      disconnect: 'Disconnect',
+      connected: 'Wallet Connected',
+      balance: 'Wallet Balance',
+      notInstalled: 'Please install a wallet like MetaMask',
+      connectionError: 'Error connecting to wallet',
+      connectionSuccess: 'Wallet connected successfully',
+      disconnectionSuccess: 'Wallet disconnected successfully',
+      notConnected: 'Please login first'
+    },
+
+    // Auth
+    auth: {
+      login: 'Login',
+      register: 'Register',
+      logout: 'Logout'
+    },
 
     // Dashboard
     myNFTs: 'My NFTs',

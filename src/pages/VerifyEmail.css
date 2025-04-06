@@ -1,0 +1,130 @@
+.verify-email-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+  background-color: var(--bg-color);
+}
+
+.verify-email-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.verify-email-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(0, 255, 157, 0.1);
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  margin: 0 auto 20px;
+}
+
+.verify-email-card h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.verify-email-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: var(--text-color-secondary);
+}
+
+.verify-email-description .email {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.verify-email-instructions {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 25px;
+  text-align: right;
+}
+
+.verify-email-instructions p {
+  margin: 10px 0;
+  font-size: 15px;
+  color: var(--text-color-secondary);
+}
+
+.verify-email-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.verify-email-actions button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.resend-button {
+  background-color: rgba(0, 255, 157, 0.1);
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.resend-button:hover:not(:disabled) {
+  background-color: rgba(0, 255, 157, 0.2);
+}
+
+.resend-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.refresh-button {
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--bg-color);
+}
+
+.refresh-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+}
+
+.back-button {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 768px) {
+  .verify-email-actions {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .verify-email-actions button {
+    flex: 1;
+    min-width: 180px;
+  }
+} 

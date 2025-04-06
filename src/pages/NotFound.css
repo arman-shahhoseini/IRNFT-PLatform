@@ -1,0 +1,88 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+  background-color: var(--bg-color);
+}
+
+.not-found-content {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 40px;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.not-found-content h1 {
+  font-size: 120px;
+  color: var(--primary-color);
+  margin: 0;
+  line-height: 1;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+}
+
+.not-found-content h2 {
+  font-size: 32px;
+  margin: 10px 0 20px;
+  color: var(--text-color);
+}
+
+.not-found-content p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: var(--text-color-secondary);
+}
+
+.not-found-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.home-button, .back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.home-button {
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--bg-color);
+}
+
+.home-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+}
+
+.back-button {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.back-button:hover {
+  background-color: rgba(0, 255, 157, 0.1);
+}
+
+@media (min-width: 768px) {
+  .not-found-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+} 
