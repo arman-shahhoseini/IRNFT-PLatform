@@ -162,7 +162,7 @@ const Home = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="/collections">
+                    <a href="/fates-faces">
                       <i className="fas fa-images"></i>
                       <span>{t('collections')}</span>
                     </a>
