@@ -487,6 +487,10 @@
     gap: 15px;
     margin-top: -55px;
   }
+
+  .collection-stats{
+    display: none;
+  }
   
   .favorites-title {
     margin-bottom: 10px;
@@ -556,6 +560,10 @@
   .favorites-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 12px;
+  }
+
+  .collection-stats{
+    display: none;
   }
   
   .favorites-title h1 {

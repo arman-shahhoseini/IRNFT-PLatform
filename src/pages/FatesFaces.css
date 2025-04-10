@@ -1111,11 +1111,12 @@
     max-height: none;
     overflow: visible;
   }
+
   
   .modal-attributes h3, 
   .modal-acquisition h3 {
     font-size: 18px;
-    margin-bottom: 12px;
+    margin-bottom: -12px;
   }
   
   .attributes-grid {
@@ -1226,6 +1227,7 @@
     max-height: none;
     overflow: visible;
   }
+
 
   .modal-attributes h3, 
   .modal-acquisition h3 {

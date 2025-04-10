@@ -256,6 +256,10 @@
     height: 200px;
   }
 
+  .collection-stats {
+    display: none;
+  }
+
   .footer-content {
     grid-template-columns: 1fr;
     text-align: center;
@@ -263,6 +267,12 @@
 
   .footer-links a:hover {
     transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .collection-stats {
+    display: none;
   }
 }
 

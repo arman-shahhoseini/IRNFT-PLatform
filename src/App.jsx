@@ -6,7 +6,6 @@ import { useAuth } from './contexts/AuthContext';
 import { ToastContainerComponent } from './utils/toast';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
-import Collections from './pages/Collections';
 import Marketplace from './pages/Marketplace';
 import News from './pages/News';
 import Support from './pages/Support';
@@ -69,7 +68,7 @@ function App() {
           <Routes>
             {/* صفحات عمومی */}
             <Route path="/" element={<Home />} />
-            <Route path="/collections" element={<Collections />} />
+            <Route path="/collections" element={<FatesFaces />} />
             <Route path="/fates-faces" element={<FatesFaces />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/marketplace" element={<Marketplace />} />
