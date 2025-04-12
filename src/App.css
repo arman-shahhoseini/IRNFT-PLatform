@@ -1971,8 +1971,7 @@ body {
   }
 
   .collection-stats {
-    flex-direction: column;
-    gap: 1rem;
+    display: none !important;
   }
 
   .featured-image {

@@ -911,7 +911,7 @@
   }
 
   .collection-stats {
-    display: none;
+    display: none !important;
   }
 
   .telegram-promo {
@@ -1160,6 +1160,7 @@
   }
 
   .collection-stats {
+    display: none !important;
     gap: 8px;
   }
 

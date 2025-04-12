@@ -17,6 +17,7 @@ import VerifyEmail from './pages/VerifyEmail';
 import NotFound from './pages/NotFound';
 import FatesFaces from './pages/FatesFaces';
 import Favorites from './pages/Favorites';
+import TestAPI from './pages/TestAPI';
 import './utils/toast.css';
 import './App.css';
 import './i18n';
@@ -129,6 +130,8 @@ function App() {
             
             {/* صفحه 404 */}
             <Route path="*" element={<NotFound />} />
+            
+            <Route path="/test-api" element={<TestAPI />} />
           </Routes>
         </main>
         

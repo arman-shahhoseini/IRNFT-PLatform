@@ -6,6 +6,7 @@ import HeroVideo from '/images/hero/hero-bg.mp4';
 import FatesFaces from '/images/collections/fates-faces.jpg';
 import EclipseSyndicate from '/images/collections/eclipse-syndicate.jpg';
 import NeonSovereigns from '/images/collections/neon-sovereigns.jpg';
+import SupportChat from '../components/SupportChat/SupportChat';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -224,6 +225,8 @@ const Home = () => {
           </div>
         </div>
       </footer>
+      
+      <SupportChat />
     </div>
   );
 };
