@@ -76,7 +76,7 @@ const Navigation = () => {
   const navLinks = [
     { path: '/', icon: <FaHome />, label: 'خانه' },
     { path: '/marketplace', icon: <FaStore />, label: 'بازار' },
-    { path: '/create', icon: <MdCreateNewFolder />, label: 'ساخت NFT' },
+    { path: '/create-nft', icon: <MdCreateNewFolder />, label: 'ساخت NFT' },
     { path: '/about', icon: <AiOutlineInfoCircle />, label: 'درباره ما' },
   ];
 

@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { WalletProvider } from './contexts/WalletContext';
 import { useAuth } from './contexts/AuthContext';
 import { ToastContainerComponent } from './utils/toast';
+import { toast } from './utils/toast';
+import { authMessages } from './utils/toast';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Marketplace from './pages/Marketplace';
@@ -18,6 +20,7 @@ import NotFound from './pages/NotFound';
 import FatesFaces from './pages/FatesFaces';
 import Favorites from './pages/Favorites';
 import TestAPI from './pages/TestAPI';
+import CreateNFT from './pages/CreateNFT';
 import './utils/toast.css';
 import './App.css';
 import './i18n';
@@ -32,6 +35,8 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!user) {
+    // نمایش پیام خطا به فارسی
+    toast.error(authMessages.unauthorized);
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
@@ -75,6 +80,11 @@ function App() {
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/news" element={<News />} />
             <Route path="/support" element={<Support />} />
+            <Route path="/create-nft" element={
+              <ProtectedRoute>
+                <CreateNFT />
+              </ProtectedRoute>
+            } />
             
             {/* صفحات مربوط به احراز هویت */}
             <Route 

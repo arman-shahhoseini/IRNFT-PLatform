@@ -135,6 +135,13 @@ export const walletMessages = () => {
   };
 };
 
+// پیام‌های احراز هویت
+export const authMessages = {
+  unauthorized: 'شما وارد حساب کاربری نشده‌اید. برای دسترسی به این بخش لطفاً ابتدا وارد شوید.',
+  accessDenied: 'شما اجازهٔ دسترسی به این بخش را ندارید.',
+  loginRequired: 'برای ادامه باید وارد حساب کاربری خود شوید.'
+};
+
 // HOC برای استفاده از toast در کامپوننت‌های کلاسی
 export const withToast = (Component) => {
   return (props) => {
