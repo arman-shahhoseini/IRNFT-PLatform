@@ -1,11 +1,11 @@
-# <img src="public/images/logo/Logo.png" alt="IRNFT Logo" width="40" style="vertical-align: middle;"/> IRNFT - پلتفرم NFT ایرانی 
+# <img src="public/images/logo/Logo.png" alt="IRNFT Logo" width="40" style="vertical-align: middle;"/> IRNFT Platform
 
 <div align="center">
   <img src="public/images/logo/Logo.png" alt="IRNFT Logo" width="250" style="margin-bottom: 20px"/>
   
-  <p style="font-size: 18px; font-weight: bold; margin: 15px 0;">اولین پلتفرم حرفه‌ای NFT ایرانی</p>
+  <p style="font-size: 18px; font-weight: bold; margin: 15px 0;">Iran's First Professional NFT Platform</p>
   
-  <p>خرید، فروش و مدیریت توکن‌های غیرقابل تعویض با امنیت بالا در بستر بلاکچین</p>
+  <p>Buy, sell, and manage non-fungible tokens with high security on the blockchain</p>
 
   ![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=white)
   ![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)
@@ -21,211 +21,229 @@
   
 </div>
 
-## 📋 فهرست مطالب
+<div align="center">
+  <h3>🌟 Elevating Digital Ownership in the Persian Market 🌟</h3>
+</div>
 
-- [✨ ویژگی‌ها](#-ویژگیها)
-- [🖼️ نمای کلی](#-نمای-کلی)
-- [🛠️ تکنولوژی‌ها](#️-تکنولوژیها)
-- [🚀 نصب و راه‌اندازی](#-نصب-و-راهاندازی)
-- [📁 ساختار پروژه](#-ساختار-پروژه)
-- [🔧 متغیرهای محیطی](#-متغیرهای-محیطی)
-- [👥 مشارکت در پروژه](#-مشارکت-در-پروژه)
-- [📄 مجوز](#-مجوز)
-- [☕ حمایت از پروژه](#-حمایت-از-پروژه)
-- [📱 ارتباط با من](#-ارتباط-با-من)
+## 📋 Table of Contents
 
-## ✨ ویژگی‌ها
+- [✨ Features](#-features)
+- [🖼️ Overview](#-overview)
+- [🛠️ Technologies](#️-technologies)
+- [🚀 Installation & Setup](#-installation--setup)
+- [📁 Project Structure](#-project-structure)
+- [🔧 Environment Variables](#-environment-variables)
+- [👥 Contributing](#-contributing)
+- [📄 License](#-license)
+- [☕ Support the Project](#-support-the-project)
+- [📱 Connect with Me](#-connect-with-me)
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <div style="flex: 1; min-width: 45%;">
+## ✨ Features
+
+<div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+  <div style="flex: 1; min-width: 45%; background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
     
-  ### 🔐 احراز هویت پیشرفته
-  - ورود با ایمیل/رمز عبور
-  - احراز هویت با حساب گوگل
-  - ثبت‌نام و تأیید ایمیل
+  ### 🔐 Advanced Authentication
+  - Email/password login
+  - Google account authentication
+  - Registration with email verification
     
-  ### 💰 اتصال کیف پول
-  - پشتیبانی از MetaMask
-  - پشتیبانی از TrustWallet
-  - پشتیبانی از WalletConnect
+  ### 💰 Wallet Connectivity
+  - MetaMask support
+  - TrustWallet support
+  - WalletConnect integration
   
-  ### 📊 داشبورد کاربری
-  - مدیریت NFT‌های شخصی
-  - مشاهده تراکنش‌ها
-  - تنظیمات پروفایل
+  ### 📊 User Dashboard
+  - Personal NFT management
+  - Transaction history
+  - Profile settings
   
   </div>
-  <div style="flex: 1; min-width: 45%;">
+  <div style="flex: 1; min-width: 45%; background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
     
-  ### 🛒 بازارچه NFT
-  - خرید و فروش امن NFT‌ها
-  - مزایده و پیشنهاد قیمت
-  - فیلترینگ و جستجوی پیشرفته
+  ### 🛒 NFT Marketplace
+  - Secure NFT trading
+  - Auction and bidding system
+  - Advanced search and filtering
   
-  ### 🌐 بومی‌سازی
-  - رابط کاربری کاملاً فارسی
-  - پشتیبانی از چندزبانگی
-  - هماهنگی با شبکه‌های ایرانی
+  ### 🌐 Localization
+  - Full Persian interface
+  - Multilingual support
+  - Compatible with Iranian networks
   
-  ### 📱 طراحی واکنش‌گرا
-  - سازگار با دسکتاپ، تبلت و موبایل
-  - رابط کاربری روان و زیبا
-  - تجربه کاربری بهینه
+  ### 📱 Responsive Design
+  - Desktop, tablet, and mobile compatible
+  - Smooth, beautiful UI
+  - Optimized user experience
     
   </div>
 </div>
 
-## 🖼️ نمای کلی
+## 🖼️ Overview
 
 <div align="center">
-  <table>
+  <table style="border-collapse: separate; border-spacing: 15px; background: transparent; border: none;">
     <tr>
-      <td align="center">
-        <strong>صفحه اصلی</strong><br/>
-        <img src="public/images/screenshots/home.png" alt="صفحه اصلی" width="100%"/>
+      <td align="center" style="background-color: #f8f9fa; border-radius: 10px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: none;">
+        <strong style="font-size: 16px; display: block; margin-bottom: 10px;">Home Page</strong>
+        <img src="public/images/screenshots/home.png" alt="Home Page" width="100%" style="border-radius: 5px;"/>
       </td>
-      <td align="center">
-        <strong>بازارچه</strong><br/>
-        <img src="public/images/screenshots/marketplace.png" alt="بازارچه" width="100%"/>
+      <td align="center" style="background-color: #f8f9fa; border-radius: 10px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: none;">
+        <strong style="font-size: 16px; display: block; margin-bottom: 10px;">Marketplace</strong>
+        <img src="public/images/screenshots/marketplace.png" alt="Marketplace" width="100%" style="border-radius: 5px;"/>
       </td>
     </tr>
     <tr>
-      <td align="center">
-        <strong>داشبورد کاربر</strong><br/>
-        <img src="public/images/screenshots/dashboard.png" alt="داشبورد" width="100%"/>
+      <td align="center" style="background-color: #f8f9fa; border-radius: 10px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: none;">
+        <strong style="font-size: 16px; display: block; margin-bottom: 10px;">User Dashboard</strong>
+        <img src="public/images/screenshots/dashboard.png" alt="Dashboard" width="100%" style="border-radius: 5px;"/>
       </td>
-      <td align="center">
-        <strong>صفحه NFT</strong><br/>
-        <img src="public/images/screenshots/nft-detail.png" alt="صفحه NFT" width="100%"/>
+      <td align="center" style="background-color: #f8f9fa; border-radius: 10px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: none;">
+        <strong style="font-size: 16px; display: block; margin-bottom: 10px;">NFT Detail Page</strong>
+        <img src="public/images/screenshots/nft-detail.png" alt="NFT Detail" width="100%" style="border-radius: 5px;"/>
       </td>
     </tr>
   </table>
 </div>
 
-## 🛠️ تکنولوژی‌ها
+## 🛠️ Technologies
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <div style="flex: 1; min-width: 45%;">
+<div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+  <div style="flex: 1; min-width: 45%; background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
     
-  ### 🖥️ فرانت‌اند
-  - **[React.js](https://reactjs.org/)** - کتابخانه UI
-  - **[Vite](https://vitejs.dev/)** - ابزار ساخت
-  - **[React Router](https://reactrouter.com/)** - مسیریابی
-  - **[i18next](https://www.i18next.com/)** - بین‌المللی‌سازی
-  - **[Framer Motion](https://www.framer.com/motion/)** - انیمیشن‌ها
+  ### 🖥️ Frontend
+  - **[React.js](https://reactjs.org/)** - UI library
+  - **[Vite](https://vitejs.dev/)** - Build tool
+  - **[React Router](https://reactrouter.com/)** - Navigation
+  - **[i18next](https://www.i18next.com/)** - Internationalization
+  - **[Framer Motion](https://www.framer.com/motion/)** - Animations
     
-  ### 🎨 استایل و UI
-  - **CSS** - استایل‌دهی پایه
+  ### 🎨 Styling & UI
+  - **CSS** - Base styling
   - **[Styled Components](https://styled-components.com/)** - CSS-in-JS
-  - **[React Icons](https://react-icons.github.io/react-icons/)** - آیکون‌ها
+  - **[React Icons](https://react-icons.github.io/react-icons/)** - Icon library
   
   </div>
-  <div style="flex: 1; min-width: 45%;">
+  <div style="flex: 1; min-width: 45%; background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
     
-  ### 🔄 بک‌اند و دیتابیس
-  - **[Firebase](https://firebase.google.com/)** - احراز هویت و استوریج
-  - **[Supabase](https://supabase.io/)** - دیتابیس و API
-  - **[GraphQL](https://graphql.org/)** - API پیشرفته
+  ### 🔄 Backend & Database
+  - **[Firebase](https://firebase.google.com/)** - Authentication & storage
+  - **[Supabase](https://supabase.io/)** - Database & API
+  - **[GraphQL](https://graphql.org/)** - Advanced API
     
-  ### ⛓️ بلاکچین
-  - **[Ethers.js](https://docs.ethers.io/)** - تعامل با بلاکچین
-  - **[Web3.js](https://web3js.readthedocs.io/)** - ارتباط با قراردادهای هوشمند
+  ### ⛓️ Blockchain
+  - **[Ethers.js](https://docs.ethers.io/)** - Blockchain interaction
+  - **[Web3.js](https://web3js.readthedocs.io/)** - Smart contract communication
   
   </div>
 </div>
 
-## 🚀 نصب و راه‌اندازی
+## 🚀 Installation & Setup
 
-### پیش‌نیازها
+### Prerequisites
 
-- Node.js نسخه 16.x یا بالاتر
-- NPM نسخه 8.x یا بالاتر
-- حساب Firebase و Supabase
-- کیف پول متامسک (برای تست)
+<ul style="list-style-type: none; padding-left: 0;">
+  <li style="margin-bottom: 10px; display: flex; align-items: center;">
+    <span style="background-color: #61DAFB; color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px;">✓</span>
+    Node.js version 16.x or higher
+  </li>
+  <li style="margin-bottom: 10px; display: flex; align-items: center;">
+    <span style="background-color: #61DAFB; color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px;">✓</span>
+    NPM version 8.x or higher
+  </li>
+  <li style="margin-bottom: 10px; display: flex; align-items: center;">
+    <span style="background-color: #61DAFB; color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px;">✓</span>
+    Firebase and Supabase accounts
+  </li>
+  <li style="margin-bottom: 10px; display: flex; align-items: center;">
+    <span style="background-color: #61DAFB; color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; justify-content: center; align-items: center; margin-right: 10px;">✓</span>
+    MetaMask wallet (for testing)
+  </li>
+</ul>
 
-### مراحل نصب
+### Installation Steps
 
-<div style="background-color: #f6f8fa; padding: 15px; border-radius: 6px; font-family: monospace;">
+<div style="background-color: #282c34; padding: 20px; border-radius: 10px; font-family: 'Courier New', monospace; margin-top: 20px; color: #e6e6e6;">
 
-1. **کلون کردن پروژه**
+1. **Clone the repository**
 ```bash
 git clone https://github.com/arman-shahhoseini/IRNFT-Platform.git
 cd IRNFT-Platform
 ```
 
-2. **نصب وابستگی‌ها**
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
-3. **تنظیم متغیرهای محیطی**
+3. **Set up environment variables**
 ```bash
 cp .env.example .env
-# فایل .env را با اطلاعات خود ویرایش کنید
+# Edit the .env file with your configuration
 ```
 
-4. **اجرای پروژه در محیط توسعه**
+4. **Run development server**
 ```bash
 npm run dev
 ```
 
-5. **ساخت نسخه نهایی**
+5. **Build for production**
 ```bash
 npm run build
 ```
 
 </div>
 
-مرورگر به صورت خودکار در آدرس `http://localhost:5173` باز می‌شود.
+Browser will automatically open at `http://localhost:5173`.
 
-## 📁 ساختار پروژه
+## 📁 Project Structure
 
-<div style="background-color: #f6f8fa; padding: 15px; border-radius: 6px; font-family: monospace; line-height: 1.5;">
+<div style="background-color: #282c34; padding: 20px; border-radius: 10px; font-family: 'Courier New', monospace; color: #e6e6e6; line-height: 1.5; margin-top: 20px;">
 
 ```
 IRNFT-Platform/
-├── public/                # فایل‌های استاتیک و تصاویر
-│   ├── images/            # تصاویر و آیکون‌ها
-│   └── fonts/             # فونت‌های پروژه
+├── public/                # Static files and images
+│   ├── images/            # Images and icons
+│   └── fonts/             # Project fonts
 │
-├── src/                   # کد اصلی پروژه
-│   ├── api/               # سرویس‌های API و درخواست‌ها
-│   ├── assets/            # منابع داخلی (فونت‌ها، تصاویر)
-│   ├── components/        # کامپوننت‌های قابل استفاده مجدد
-│   │   ├── common/        # کامپوننت‌های عمومی
-│   │   ├── layouts/       # لایه‌های اصلی
-│   │   └── ui/            # کامپوننت‌های رابط کاربری
+├── src/                   # Main project code
+│   ├── api/               # API services and requests
+│   ├── assets/            # Internal resources (fonts, images)
+│   ├── components/        # Reusable components
+│   │   ├── common/        # Common components
+│   │   ├── layouts/       # Main layouts
+│   │   └── ui/            # UI components
 │   │
-│   ├── contexts/          # Context های React
-│   ├── data/              # داده‌های استاتیک
-│   ├── firebase/          # پیکربندی Firebase
-│   ├── pages/             # صفحات اصلی برنامه
-│   ├── services/          # سرویس‌های برنامه
-│   ├── styles/            # استایل‌های سراسری
-│   ├── translations/      # فایل‌های ترجمه
-│   ├── utils/             # توابع کمکی
+│   ├── contexts/          # React Contexts
+│   ├── data/              # Static data
+│   ├── firebase/          # Firebase configuration
+│   ├── pages/             # Main application pages
+│   ├── services/          # Application services
+│   ├── styles/            # Global styles
+│   ├── translations/      # Translation files
+│   ├── utils/             # Helper functions
 │   │
-│   ├── App.jsx            # کامپوننت اصلی
-│   ├── App.css            # استایل‌های اصلی
-│   ├── i18n.js            # پیکربندی بین‌المللی‌سازی
-│   ├── index.css          # استایل‌های پایه
-│   └── main.jsx           # نقطه ورود برنامه
+│   ├── App.jsx            # Main component
+│   ├── App.css            # Main styles
+│   ├── i18n.js            # Internationalization config
+│   ├── index.css          # Base styles
+│   └── main.jsx           # Application entry point
 │
-├── .env                   # متغیرهای محیطی (اصلی)
-├── .env.example           # نمونه متغیرهای محیطی
-├── .gitignore             # فایل‌های نادیده گرفته شده
-├── vite.config.js         # پیکربندی Vite
-├── package.json           # مدیریت وابستگی‌ها
-└── README.md              # مستندات
+├── .env                   # Environment variables (main)
+├── .env.example           # Environment variables example
+├── .gitignore             # Ignored files
+├── vite.config.js         # Vite configuration
+├── package.json           # Dependency management
+└── README.md              # Documentation
 ```
 
 </div>
 
-## 🔧 متغیرهای محیطی
+## 🔧 Environment Variables
 
-برای اجرای صحیح پروژه، یک فایل `.env` در پوشه ریشه ایجاد کنید و موارد زیر را پیکربندی نمایید:
+Create a `.env` file in the root directory and configure the following variables:
 
-<div style="background-color: #f6f8fa; padding: 15px; border-radius: 6px; font-family: monospace;">
+<div style="background-color: #282c34; padding: 20px; border-radius: 10px; font-family: 'Courier New', monospace; color: #e6e6e6; margin-top: 20px;">
 
 ```bash
 # API
@@ -243,7 +261,7 @@ VITE_FIREBASE_APP_ID=your_app_id
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-# بلاکچین
+# Blockchain
 VITE_CONTRACT_ADDRESS=your_contract_address
 VITE_NETWORK_CHAIN_ID=11155111
 VITE_IPFS_GATEWAY=https://ipfs.io/ipfs/
@@ -251,52 +269,69 @@ VITE_IPFS_GATEWAY=https://ipfs.io/ipfs/
 
 </div>
 
-## 👥 مشارکت در پروژه
+## 👥 Contributing
 
-از مشارکت شما در این پروژه استقبال می‌کنیم! برای مشارکت:
+We welcome your contributions! To contribute:
 
-1. پروژه را فورک کنید
-2. یک شاخه جدید ایجاد کنید (`git checkout -b feature/amazing-feature`)
-3. تغییرات خود را کامیت کنید (`git commit -m 'Add some amazing feature'`)
-4. به شاخه خود پوش کنید (`git push origin feature/amazing-feature`)
-5. یک Pull Request ارسال کنید
+<div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+  <div style="flex: 1; min-width: 45%; background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <h3 style="margin-top: 0;">How to Contribute</h3>
+    <ol>
+      <li>Fork the project</li>
+      <li>Create a feature branch (<code>git checkout -b feature/amazing-feature</code>)</li>
+      <li>Commit your changes (<code>git commit -m 'Add some amazing feature'</code>)</li>
+      <li>Push to your branch (<code>git push origin feature/amazing-feature</code>)</li>
+      <li>Open a Pull Request</li>
+    </ol>
+  </div>
+  <div style="flex: 1; min-width: 45%; background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <h3 style="margin-top: 0;">Contribution Guidelines</h3>
+    <ul>
+      <li>Follow the existing code style</li>
+      <li>Write clean, maintainable code</li>
+      <li>Add tests for new features</li>
+      <li>Update documentation as needed</li>
+      <li>Ensure your code works in all supported browsers</li>
+    </ul>
+  </div>
+</div>
 
-## 📄 مجوز
+## 📄 License
 
-این پروژه تحت مجوز [MIT](LICENSE) منتشر شده است.
+This project is licensed under the [MIT License](LICENSE).
 
-## ☕ حمایت از پروژه
+## ☕ Support the Project
 
-<div style="background: linear-gradient(135deg, #6e48aa, #9d50bb); padding: 20px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-width: 500px; margin: 0 auto;">
-  <h3 style="color: white; margin-bottom: 15px;">☕ حمایت از پروژه</h3>
-  <p style="color: white; margin-bottom: 15px;">اگر این پروژه برای شما مفید بوده، می‌توانید با یک فنجان قهوه از من حمایت کنید!</p>
-  <a href="http://www.coffeete.ir/armanshahhoseini">
-    <img src="http://www.coffeete.ir/images/buttons/lemonchiffon.png" style="width:260px; transition: transform 0.3s; border-radius: 8px;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+<div style="background: linear-gradient(135deg, #6e48aa, #9d50bb); padding: 25px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-width: 550px; margin: 30px auto; text-align: center;">
+  <h3 style="color: white; margin-bottom: 15px; font-size: 24px;">☕ Support My Work</h3>
+  <p style="color: white; margin-bottom: 20px; font-size: 16px;">If you find this project helpful or interesting, you can buy me a coffee to support further development!</p>
+  <a href="http://www.coffeete.ir/armanshahhoseini" style="display: inline-block;">
+    <img src="http://www.coffeete.ir/images/buttons/lemonchiffon.png" style="width:280px; transition: transform 0.3s; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
   </a>
 </div>
 
-## 📱 ارتباط با من
+## 📱 Connect with Me
 
-<div align="center" style="margin-top: 20px;">
-  <a href="https://www.linkedin.com/in/arman-shahhoseini-4447152a0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+<div align="center" style="margin-top: 30px;">
+  <a href="https://www.linkedin.com/in/arman-shahhoseini-4447152a0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="text-decoration: none; margin: 0 10px;">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin" />
   </a>
-  <a href="https://t.me/armnre" target="_blank">
+  <a href="https://t.me/armnre" target="_blank" style="text-decoration: none; margin: 0 10px;">
     <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="telegram" />
   </a>
-  <a href="https://www.instagram.com/arman.script?igsh=cnZ1dW9yYzFka3Jq" target="_blank">
+  <a href="https://www.instagram.com/arman.script?igsh=cnZ1dW9yYzFka3Jq" target="_blank" style="text-decoration: none; margin: 0 10px;">
     <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="instagram" />
   </a>
-  <a href="mailto:shahhoseiniarman@gmail.com">
+  <a href="mailto:shahhoseiniarman@gmail.com" style="text-decoration: none; margin: 0 10px;">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="gmail" />
   </a>
-  <a href="https://github.com/arman-shahhoseini" target="_blank">
+  <a href="https://github.com/arman-shahhoseini" target="_blank" style="text-decoration: none; margin: 0 10px;">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="github" />
   </a>
 </div>
 
-<div align="center" style="margin-top: 30px;">
-  <p>
-    با ❤️ توسط <a href="https://github.com/arman-shahhoseini">آرمان شاهحسینی</a> توسعه یافته است
+<div align="center" style="margin-top: 40px; background-color: #f8f9fa; padding: 20px; border-radius: 10px; display: inline-block;">
+  <p style="margin: 0; font-size: 16px;">
+    Developed with ❤️ by <a href="https://github.com/arman-shahhoseini">Arman Shahhoseini</a>
   </p>
 </div>
